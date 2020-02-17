@@ -2,9 +2,11 @@ NGINX 1.3.9 testsuite for Popcorn homogeneous benchmark testing
 
 This benchmark suite has been tested with two x86 VMs.
 
-1) Clone popcorn-kernel in host machine :
+1) Clone popcorn-compiler in host machine :
 
-	git clone https://github.com/ssrg-vt/popcorn-kernel.git
+	a) https://github.com/ssrg-vt/popcorn-compiler.git
+	b) git checkout secure-popcorn
+	c) run the install_compiler.py (Check before installing if another version of compiler is already present)
 
 2) Setting up x86 VMs
 
@@ -39,6 +41,7 @@ Booting and Differentiating the second x86 VM :
 
 	The VMs currenntly contain same IP and MAC configured. This section is used to describes how to change. 
 	Boot the x86_2.img using the following command.
+	
 	--> sudo qemu-system-x86_64     -enable-kvm -cpu host -smp 2 -m 4096 -no-reboot -nographic   \  
 	-drive id=root,media=disk,file=x86_2.img     -net nic,macaddr=00:da:bc:de:00:13 -net tap     \
 	-kernel linux-x86/arch/x86/boot/bzImage     -append "root=/dev/sda1 console=ttyS0"
