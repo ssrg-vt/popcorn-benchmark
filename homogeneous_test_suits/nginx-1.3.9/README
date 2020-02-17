@@ -11,14 +11,15 @@ This benchmark suite has been tested with two x86 VMs.
 	Download VM Image from "https://drive.google.com/open?id=0B7RfKPGm2YZsaURxTVh5ZTMyTk0"
 ************************************
 	Command for Downloading large files from Gdrive --> 
-	"wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=FILEID' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=FILEID" -O FILENAME && rm -rf /tmp/cookies.txt "
+	"wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet 
+	--save-cookies /tmp/cookies.txt --keep-session-cookies 
+	--no-check-certificate 'https://docs.google.com/uc?export=download&id=FILEID' -O- | 
+	sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=FILEID" -O FILENAME && rm -rf /tmp/cookies.txt "
 *************************************
-	
 	Change the FILEID with ID. Example for above Glink :" 0B7RfKPGm2YZsaURxTVh5ZTMyTk0" part from the above link.
 	Change the FILENAME as x86.img."This takes time to download."
 
-	Make a copy of the image with another name as x86_2.img.
-
+	Make a copy of the image with another name as x86_2.img
 
 3) Clone and build the popcorn-kernel for x86 varient :
 	a) git clone https://github.com/ssrg-vt/popcorn-kernel.git linux-x86
@@ -29,8 +30,12 @@ This benchmark suite has been tested with two x86 VMs.
 Now the Home folder should look like this. 		
 folder$   x86.img x86_2.img linux-x86/
 *******************************************************
+Booting the first VM :
+	Command --> sudo qemu-system-x86_64     -enable-kvm -cpu host -smp 2 -m 4096 -no-reboot -nographic     
+	-drive id=root,media=disk,file=x86.img     -net nic,macaddr=00:da:bc:de:00:13 -net tap     
+	-kernel linux-x86/arch/x86/boot/bzImage     -append "root=/dev/sda1 console=ttyS0"
 
-Differentiating the second x86 VM :
+Booting and Differentiating the second x86 VM :
 
 	The VMs currenntly contain same IP and MAC configured. This section is used to describes how to change. 
 	Boot the x86_2.img using the following command.
@@ -48,6 +53,7 @@ Differentiating the second x86 VM :
         dns-nameservers 8.8.8.8
 ---->   	hwaddress ether 00:da:bc:de:00:12	// This tab before the line is important. Dosen't work otherwise.
 	Now you have given the new machine a different static IP and mac address.
+	Reboot the second VM once for reflecting the networking changes. 
 
  4) Setup the messaging layer in the VMs. (Core of Popcorn) :
 
@@ -93,4 +99,4 @@ Differentiating the second x86 VM :
 	$ curl 10.4.4.100:8000 (If you configured a different port number change the port) 
 		 Example if port is 400 , perform $curl 10.4.4.100:400
 		 
-		 
+	The benchmark works , if the curl command returns the index.html file on host PC. 	 
