@@ -1,14 +1,15 @@
+
 NGINX 1.3.9 testsuite for Popcorn homogeneous benchmark testing
 
 This benchmark suite has been tested with two x86 VMs.
 
-1) Clone popcorn-compiler in host machine :
+1) **Clone popcorn-compiler in host machine :**
 
 	a) https://github.com/ssrg-vt/popcorn-compiler.git
 	b) git checkout secure-popcorn
 	c) run the install_compiler.py (Check before installing if another version of compiler is already present)
 
-2) Setting up x86 VMs
+2) **Setting up x86 VMs**
 
 	Download VM Image from "https://drive.google.com/open?id=0B7RfKPGm2YZsaURxTVh5ZTMyTk0"
 ************************************
@@ -23,7 +24,7 @@ This benchmark suite has been tested with two x86 VMs.
 
 	Make a copy of the image with another name as x86_2.img
 
-3) Clone and build the popcorn-kernel for x86 varient :
+3) **Clone and build the popcorn-kernel for x86 varient :**
 	a) git clone https://github.com/ssrg-vt/popcorn-kernel.git linux-x86
 	b) cp linux-x86/kernel/popcorn/configs/config-x86_64-qemu linux-x86/.config
 	c) make -C linux-x86 -j 8
@@ -54,11 +55,12 @@ Booting and Differentiating the second x86 VM :
         netmask 255.255.255.0
         gateway 10.4.4.1
         dns-nameservers 8.8.8.8
----->   	hwaddress ether 00:da:bc:de:00:12	// This tab before the line is important. Dosen't work otherwise.
-	Now you have given the new machine a different static IP and mac address.
+		 	hwaddress ether 00:da:bc:ef:00:12	// This tab before the line is important. Dosen't work otherwise.
+	
+Now you have given the new machine a different static IP and mac address.
 	Reboot the second VM once for reflecting the networking changes. 
 
- 4) Setup the messaging layer in the VMs. (Core of Popcorn) :
+ 4) **Setup the messaging layer in the VMs. (Core of Popcorn) :**
 
 	Wiki Link --> https://github.com/ssrg-vt/popcorn-kernel/wiki/VM-Setup#setup-the-popcorn-messaging-layer
 		
@@ -70,22 +72,19 @@ Booting and Differentiating the second x86 VM :
 	2) make -j8
 	3) copy the "nginx" executable to the VMs. 
 
-6) Place an index.html at the specified location in 
+6) **Place an index.html at the specified location in** 
 
 	server {
         listen       8000;	      --> Port can be changes, make sure to curl same address.
         server_name  localhost;
-
         #charset koi8-r;
-
         #access_log  logs/host.access.log  main;
-
         location / {
             root   /home/popcorn/;	--> Location can be edited but make sure to place file in the location
             index  index.html;
         }
 
-7) Running the benchmark suite.
+7) **Running the benchmark suite.**
 	1) Run the nginx from home folder of Node 0 VM of the popcorn layer.
 	Migration points placed
 
@@ -94,7 +93,7 @@ Booting and Differentiating the second x86 VM :
 
 	//You can play around placing migration points at any part of the code. 	//The order of migration is to be kept in mind while placeing the points.
 
-8) Testing Nginx migration :
+8) **Testing Nginx migration :**
 
 	Once the above steps are done , the Nginx is now hopped onto second VM. To test if our benchmark suite is working , 
 	perform from your host PC in the same network.
