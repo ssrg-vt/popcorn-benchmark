@@ -34,8 +34,9 @@ Now the Home folder should look like this.
 folder$   x86.img x86_2.img linux-x86/
 *******************************************************
 Booting the first VM :
-	Command --> sudo qemu-system-x86_64     -enable-kvm -cpu host -smp 2 -m 4096 -no-reboot -nographic     
-	-drive id=root,media=disk,file=x86.img     -net nic,macaddr=00:da:bc:de:00:13 -net tap     
+	Command --> 
+	sudo qemu-system-x86_64     -enable-kvm -cpu host -smp 2 -m 4096 -no-reboot -nographic     
+	-drive id=root,media=disk,file=x86.img     -net nic,macaddr=00:da:bc:ef:00:13 -net tap     
 	-kernel linux-x86/arch/x86/boot/bzImage     -append "root=/dev/sda1 console=ttyS0"
 
 Booting and Differentiating the second x86 VM :
@@ -44,7 +45,7 @@ Booting and Differentiating the second x86 VM :
 	Boot the x86_2.img using the following command.
 	
 	--> sudo qemu-system-x86_64     -enable-kvm -cpu host -smp 2 -m 4096 -no-reboot -nographic   \  
-	-drive id=root,media=disk,file=x86_2.img     -net nic,macaddr=00:da:bc:de:00:13 -net tap     \
+	-drive id=root,media=disk,file=x86_2.img     -net nic,macaddr=00:da:bc:ef:00:13 -net tap     \
 	-kernel linux-x86/arch/x86/boot/bzImage     -append "root=/dev/sda1 console=ttyS0"
 	
 	Now edit the /etc/network/interfaces file as below only for second machine.
