@@ -1,5 +1,5 @@
 1) Compilation
-    To build the heterogeneous nginx project , just make -j 'nproc' on root folder will suffice.
+    To build the heterogeneous nginx project , just "./myconfig.sh" on root folder will suffice.
     The binaries are generated in obj folder.
     
     We have everything in place to compile and get the binaries.Binaries are generated in src folder. 
