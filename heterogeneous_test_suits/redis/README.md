@@ -43,6 +43,19 @@ After building Redis, it is a good idea to test it using:
 
     % make test
 
+Build Redis for Popcorn Linux
+---
+Use the `secure-popcorn` branch of the popcorn compiler, just type `make` in the Redis root dir.
+Or use the docker image `xgwang9/popcorn-compiler:HeterSec`:
+```
+❯ cd heterogeneous_test_suits/
+❯ docker run --rm \
+        -v $(pwd)/redis:/code/app \
+        --user "$(id -u):$(id -g)" \
+        xgwang9/popcorn-compiler:HeterSec \    
+        make -C /code/app
+```
+
 Fixing build problems with dependencies or cached build options
 ---------
 

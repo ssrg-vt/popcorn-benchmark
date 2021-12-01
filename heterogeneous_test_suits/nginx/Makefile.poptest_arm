@@ -1,4 +1,4 @@
-POPCORN := /share/ashwin/secure-popcorn
+POPCORN := /usr/local/popcorn
 
 # FIXME directory of libgcc & libgcc_eh for aarch64 compiler
 ARM64_LIBGCC := $(shell dirname \
