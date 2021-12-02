@@ -8,7 +8,6 @@
 
 # FIXME directory of Popcorn compiler installation
 #POPCORN := /usr/local/popcorn
-POPCORN := /home/ashwin/pcn_900_compiler/
 
 # FIXME directory of libgcc & libgcc_eh for aarch64 compiler
 ARM64_LIBGCC := $(shell dirname \
