@@ -45,7 +45,20 @@ After building Redis, it is a good idea to test it using:
 
 Build Redis for Popcorn Linux
 ---
-Use the `secure-popcorn` branch of the popcorn compiler, just type `make` in the Redis root dir.
+### Build Redis using Popcorn Compiler LLVM 9 (Default)
+Use the `main` branch of the popcorn compiler, just type `make` in the Redis root dir.
+Or use the docker image `xgwang9/popcorn-compiler:main`:
+```
+❯ cd heterogeneous_test_suits/
+❯ docker run --rm \
+        -v $(pwd)/redis:/code/app \
+        --user "$(id -u):$(id -g)" \
+        xgwang9/popcorn-compiler:main \    
+        make -C /code/app
+```
+
+### Build Redis using Popcorn Compiler LLVM 3.7
+Use the `secure-popcorn` branch of the popcorn compiler, just type `make LLVM=3.7` in the Redis root dir.
 Or use the docker image `xgwang9/popcorn-compiler:HeterSec`:
 ```
 ❯ cd heterogeneous_test_suits/
@@ -53,7 +66,7 @@ Or use the docker image `xgwang9/popcorn-compiler:HeterSec`:
         -v $(pwd)/redis:/code/app \
         --user "$(id -u):$(id -g)" \
         xgwang9/popcorn-compiler:HeterSec \    
-        make -C /code/app
+        make -C /code/app LLVM=3.7
 ```
 
 Fixing build problems with dependencies or cached build options
