@@ -109,6 +109,3 @@ have=NGX_USER value="\"$NGX_USER\"" . auto/define
 have=NGX_GROUP value="\"$NGX_GROUP\"" . auto/define
 
 . auto/summary
-cp master_Makefile Makefile
-make -j8
-make post_process
