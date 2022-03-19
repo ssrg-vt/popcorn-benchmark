@@ -10,8 +10,10 @@
 POPCORN := /usr/local/popcorn
 
 # FIXME directory of libgcc & libgcc_eh for aarch64 compiler
+#ARM64_LIBGCC := $(shell dirname \
+#                $(shell $(POPCORN)/bin/aarch64-popcorn-linux-gnu-gcc -print-libgcc-file-name))
 ARM64_LIBGCC := $(shell dirname \
-                $(shell $(POPCORN)/bin/aarch64-popcorn-linux-gnu-gcc -print-libgcc-file-name))
+                $(shell aarch64-linux-gnu-gcc -print-libgcc-file-name))
 
 BIN := kmeans
 
