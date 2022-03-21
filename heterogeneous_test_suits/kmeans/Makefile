@@ -10,15 +10,15 @@
 POPCORN := /usr/local/popcorn
 
 # FIXME directory of libgcc & libgcc_eh for aarch64 compiler
-#ARM64_LIBGCC := $(shell dirname \
-#                $(shell $(POPCORN)/bin/aarch64-popcorn-linux-gnu-gcc -print-libgcc-file-name))
 ARM64_LIBGCC := $(shell dirname \
                 $(shell aarch64-linux-gnu-gcc -print-libgcc-file-name))
 
+# FIXME name of the generated executable
 BIN := kmeans
 
-SRC := kmeans.c
- 
+# FIXME specify source files
+SRC := $(shell ls *.c)
+
 APP_DIR := $(shell pwd)
 
 ###############################################################################
@@ -35,7 +35,8 @@ HET_CFLAGS := $(CFLAGS) -popcorn-migratable -fno-common \
 IR := $(SRC:.c=.ll)
 
 # Linker
-LD      := $(POPCORN)/bin/x86_64-popcorn-linux-gnu-ld.gold
+LD      := $(POPCORN)/bin/x86_64-popcorn-linux-gnu-ld.bfd
+ARM64_LD := $(POPCORN)/bin/aarch64-popcorn-linux-gnu-ld.bfd
 LDFLAGS := -z noexecstack -z relro --hash-style=gnu --build-id -static
 LIBS    := /lib/crt1.o \
            /lib/libc.a \
@@ -169,7 +170,7 @@ clean:
 
 $(ARM64_VANILLA): $(ARM64_BUILD)/.dir $(ARM64_OBJ)
 	@echo " [LD] $@ (vanilla)"
-	@$(LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map $(ARM64_MAP)
+	@$(ARM64_LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map $(ARM64_MAP)
 
 $(ARM64_LD_SCRIPT): $(ARM64_VANILLA) $(X86_64_VANILLA) 
 	@echo " [ALIGN] $@"
@@ -180,7 +181,7 @@ $(ARM64_LD_SCRIPT): $(ARM64_VANILLA) $(X86_64_VANILLA)
 
 $(ARM64_ALIGNED): $(ARM64_LD_SCRIPT)
 	@echo " [LD] $@ (aligned)"
-	@$(LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map \
+	@$(ARM64_LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map \
 		$(ARM64_ALIGNED_MAP) -T $<
 
 ##########

@@ -34,8 +34,8 @@ int num_means = 100;		/* number of clusters */
 int dim = 3;				/* Dimension of each vector */
 int grid_size = 1000;		/* size of each dimension of vector space */
 
-int num_nodes = 1;			/* Number of nodes to use */
-int threads_per_node = 8;	/* Threads per node */
+int num_nodes = 2;			/* Number of nodes to use */
+int threads_per_node = 1;	/* Threads per node */
 
 int modified = true;
 pthread_barrier_t barr;		/* Synchronization with main thread */
