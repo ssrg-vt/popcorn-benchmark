@@ -44,6 +44,7 @@
 #include "timers.h"
 #include "print_results.h"
 
+#include "migrate.h"
 
 //---------------------------------------------------------------------
 /* common / main_int_mem / */
@@ -288,6 +289,8 @@ int main(int argc, char *argv[])
 
   timer_start(T_bench);
 
+  printf("goin to migrate to 1\n\n");
+  migrate(1, NULL, NULL);
   //---------------------------------------------------------------------
   //---->
   // Main Iteration for inverse power method
@@ -297,11 +300,11 @@ int main(int argc, char *argv[])
     //---------------------------------------------------------------------
     // The call to the conjugate gradient routine:
     //---------------------------------------------------------------------
-	migrate(1, NULL, NULL);
+	//migrate(1, NULL, NULL);
     if (timeron) timer_start(T_conj_grad);
     conj_grad(colidx, rowstr, x, z, a, p, q, r, &rnorm);
     if (timeron) timer_stop(T_conj_grad);
-	migrate(0, NULL, NULL);
+	//migrate(0, NULL, NULL);
 
     //---------------------------------------------------------------------
     // zeta = shift + 1/(x.z)
@@ -331,6 +334,8 @@ int main(int argc, char *argv[])
     }
   } // end of main iter inv pow meth
 
+  migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
   timer_stop(T_bench);
 
   //---------------------------------------------------------------------

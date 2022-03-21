@@ -53,6 +53,8 @@
 #include "macrodef.h"
 #include "npbparams.h"
 
+#include "migrate.h"
+
 #ifdef UNIX
 #include <sys/types.h>
 #include <unistd.h>
@@ -205,9 +207,16 @@ int32 DC(ADC_VIEW_PARS *adcpp) {
    }
    timer_clear(itsk);
    timer_start(itsk);
+
+	printf("goin to migrate to 1\n\n");
+	migrate(1, NULL, NULL);
    if( ComputeGivenGroupbys(adccntlp) ) {
       PutErrMsg("DC.ComputeGivenGroupbys failed");
    }
+
+	migrate(0, NULL, NULL);
+	printf("\n\nmigrated back from 1\n");
+
    timer_stop(itsk);
    pvstp->tm_max = timer_read(itsk);
    pvstp->verificationFailed += adccntlp->verificationFailed;
@@ -224,7 +233,7 @@ int32 DC(ADC_VIEW_PARS *adcpp) {
 
    t_total=pvstp->tm_max; 
 
-   pvstp->verificationFailed=Verify(pvstp->checksum,adcpp);
+   pvstp->verificationFailed = Verify(pvstp->checksum,adcpp);
    verified = (pvstp->verificationFailed == -1)? -1 :
               (pvstp->verificationFailed ==  0)?  1 : 0;
 

@@ -40,6 +40,7 @@
 #include "timers.h"
 #include "print_results.h"
 
+#include "migrate.h"
 
 /* common /usrdati/ */
 int fre, niter, nmxh;
@@ -331,6 +332,7 @@ int main(int argc, char *argv[])
   if (timeron) timer_stop(t_init);
 
   timer_clear(1);
+  printf("goin to migrate to 1 (ua timer_start at iter1 at remote)\n\n");
   migrate(1, NULL, NULL);
 
   time = 0.0;
@@ -408,6 +410,7 @@ int main(int argc, char *argv[])
     nelt_tot = nelt_tot + (double)(nelt);
   }
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
 
   timer_stop(1);
   tmax = timer_read(1);

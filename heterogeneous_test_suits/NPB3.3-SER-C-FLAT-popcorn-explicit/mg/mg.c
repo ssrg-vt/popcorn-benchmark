@@ -44,6 +44,8 @@
 #include "timers.h"
 #include "print_results.h"
 
+#include "migrate.h"
+
 
 static void setup(int *n1, int *n2, int *n3);
 static void mg3P(double u[], double v[], double r[],
@@ -248,6 +250,7 @@ int main()
   }
 
   timer_start(T_bench);
+  printf("goin to migrate to 1\n\n");
   migrate(1, NULL, NULL);
 
   if (timeron) timer_start(T_resid2);
@@ -272,6 +275,7 @@ int main()
   norm2u3(r, n1, n2, n3, &rnm2, &rnmu, nx[lt], ny[lt], nz[lt]);
 
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
   timer_stop(T_bench);
 
   t = timer_read(T_bench);

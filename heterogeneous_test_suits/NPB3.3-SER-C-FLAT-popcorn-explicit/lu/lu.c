@@ -50,6 +50,7 @@
 #include "timers.h"
 #include "print_results.h"
 
+#include "migrate.h"
 
 //---------------------------------------------------------------------
 // grid
@@ -158,6 +159,7 @@ int main(int argc, char *argv[])
     timeron = false;
   }
 
+  printf("goin to migrate to 1\n\n");
   migrate(1, NULL, NULL);
   //---------------------------------------------------------------------
   // read input data
@@ -215,6 +217,7 @@ int main(int argc, char *argv[])
   //---------------------------------------------------------------------
   pintgr();
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
 
   //---------------------------------------------------------------------
   // verification test

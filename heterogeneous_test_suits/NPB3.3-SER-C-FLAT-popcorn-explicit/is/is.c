@@ -44,6 +44,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "migrate.h"
 
 /*****************************************************************/
 /* For serial IS, buckets are not really req'd to solve NPB1 IS  */
@@ -727,16 +728,19 @@ int main( int argc, char **argv )
 /*  Start timer  */             
     timer_start( 0 );
 
+    printf("goin to migrate to 1\n\n");
+	migrate(1, NULL, NULL);
 
 /*  This is the main iteration */
     for( iteration=1; iteration<=MAX_ITERATIONS; iteration++ )
     {
         if( CLASS != 'S' ) printf( "        %d\n", iteration );
-		migrate(1, NULL, NULL);
         rank( iteration );
-		migrate(0, NULL, NULL);
     }
 
+
+	migrate(0, NULL, NULL);
+	printf("\n\nmigrated back from 1\n");
 
 /*  End of timing, obtain maximum time of all processors */
     timer_stop( 0 );

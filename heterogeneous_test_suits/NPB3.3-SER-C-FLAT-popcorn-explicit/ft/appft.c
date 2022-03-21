@@ -38,6 +38,8 @@
 #include "global.h"
 #include "timers.h"
 
+#include "migrate.h"
+
 
 // for checksum data
 /* common /sumcomm/ */
@@ -71,6 +73,7 @@ void appft(int niter, double *total_time, logical *verified)
   timer_stop(2);
 
   timer_start(1);
+  printf("goin to migrate to 1\n\n");
   migrate(1, NULL, NULL);
   if (timers_enabled) timer_start(13);
 
@@ -111,6 +114,7 @@ void appft(int niter, double *total_time, logical *verified)
     if (timers_enabled) timer_stop(10);
   }
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
 
   // Verification test.
   if (timers_enabled) timer_start(14);

@@ -54,6 +54,8 @@
 #include "timers.h"
 #include "print_results.h"
 
+#include "migrate.h"
+
 #define MAX(X,Y)  (((X) > (Y)) ? (X) : (Y))
 
 #define MK        16
@@ -134,6 +136,7 @@ int main()
   timer_clear(2);
   timer_start(0);
 
+  printf("goin to migrate to 1\n\n");
   migrate(1, NULL, NULL);
 
   t1 = A;
@@ -219,6 +222,7 @@ int main()
   }
 
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
 
   timer_stop(0);
   tm = timer_read(0);

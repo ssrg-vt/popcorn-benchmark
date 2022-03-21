@@ -377,7 +377,7 @@ int CalculateVeiwSizes(ADC_PAR *par){
     fprintf(view,"Selection:");
     idx=dcview[i].vidx;
     for(j=0;j<dcdim;j++) 
-      if((idx>>j)&0x1==1) { fprintf(view," %lld",j+1); nViewDims++;}
+      if(((idx>>j)&0x1)==1) { fprintf(view," %lld",j+1); nViewDims++;} // pophype
     fprintf(view,"\nView Size: %lld\n",dcview[i].vsize);
 
     totalInBytes += (8+4*nViewDims)*dcview[i].vsize;
@@ -434,7 +434,7 @@ int ParseParFile(char* parfname,ADC_PAR *par){
           break;
           case 5:
             par->filename=(char*) malloc(strlen(pos)*sizeof(char));
-            sscanf(pos,"%s",par->filename);
+            sscanf(pos,"%s", (char*)par->filename); /* pophype */
           break;
           case 6:
             sscanf(pos,"%c",&(par->clss));

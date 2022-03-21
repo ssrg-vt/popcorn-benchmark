@@ -35,7 +35,8 @@ HET_CFLAGS := $(CFLAGS) -popcorn-migratable -fno-common \
 IR := $(SRC:.c=.ll)
 
 # Linker
-LD      := $(POPCORN)/bin/x86_64-popcorn-linux-gnu-ld.gold
+LD      := $(POPCORN)/bin/x86_64-popcorn-linux-gnu-ld.bfd
+ARM64_LD := $(POPCORN)/bin/aarch64-popcorn-linux-gnu-ld.bfd
 LDFLAGS := -z noexecstack -z relro --hash-style=gnu --build-id -static
 LIBS    := /lib/crt1.o \
            /lib/libc.a \
@@ -45,7 +46,6 @@ LIBS    := /lib/crt1.o \
            /lib/libpthread.a \
            /lib/libc.a \
            /lib/libm.a
-
 LIBGCC  := --start-group -lgcc -lgcc_eh --end-group
 
 # Alignment
@@ -170,7 +170,7 @@ clean:
 
 $(ARM64_VANILLA): $(ARM64_BUILD)/.dir $(ARM64_OBJ)
 	@echo " [LD] $@ (vanilla)"
-	@$(LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map $(ARM64_MAP)
+	@$(ARM64_LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map $(ARM64_MAP)
 
 $(ARM64_LD_SCRIPT): $(ARM64_VANILLA) $(X86_64_VANILLA) 
 	@echo " [ALIGN] $@"
@@ -181,7 +181,7 @@ $(ARM64_LD_SCRIPT): $(ARM64_VANILLA) $(X86_64_VANILLA)
 
 $(ARM64_ALIGNED): $(ARM64_LD_SCRIPT)
 	@echo " [LD] $@ (aligned)"
-	@$(LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map \
+	@$(ARM64_LD) -o $@ $(ARM64_OBJ) $(LDFLAGS) $(ARM64_LDFLAGS) -Map \
 		$(ARM64_ALIGNED_MAP) -T $<
 
 ##########

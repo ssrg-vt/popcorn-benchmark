@@ -41,6 +41,8 @@
 #include "header.h"
 #include "print_results.h"
 
+#include "migrate.h"
+
 /* common /global/ */
 int grid_points[3], nx2, ny2, nz2;
 logical timeron;
@@ -181,6 +183,7 @@ int main(int argc, char *argv[])
   }
   timer_start(1);
 
+  printf("goin to migrate to 1\n\n");
   migrate(1, NULL, NULL);
   for (step = 1; step <= niter; step++) {
     if ((step % 20) == 0 || step == 1) {
@@ -190,6 +193,7 @@ int main(int argc, char *argv[])
     adi();
   }
   migrate(0, NULL, NULL);
+  printf("\n\nmigrated back from 1\n");
 
   timer_stop(1);
   tmax = timer_read(1);
