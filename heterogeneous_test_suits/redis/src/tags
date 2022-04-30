@@ -861,7 +861,7 @@ OUTPUT_RAW	redis-cli.c	62;"	d	file:
 OUTPUT_STANDARD	redis-cli.c	61;"	d	file:
 PDP_ENDIAN	config.h	145;"	d
 PIPEMODE_WRITE_LOOP_MAX_BYTES	redis-cli.c	6694;"	d	file:
-POPCORN	Makefile	/^POPCORN := \/usr\/local\/popcorn$/;"	m
+POPCORN	Makefile	/^POPCORN := \/usr\/local\/stack_pop$/;"	m
 POPCORN_REDIS_CC	Makefile	/^POPCORN_REDIS_CC=$(QUIET_CC)$(CC) $(HET_CFLAGS)$/;"	m
 POST_PROCESS	Makefile	/^POST_PROCESS   := $(POPCORN)\/bin\/gen-stackinfo$/;"	m
 PREFIX	Makefile	/^PREFIX?=\/usr\/local$/;"	m

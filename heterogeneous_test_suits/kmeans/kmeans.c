@@ -272,7 +272,7 @@ static void *thread_loop(void *args)
 #else
 	sum = (int *)malloc(sizeof(int) * dim);
 #endif
-	migrate(targ->nid, NULL, NULL);
+	check_migrate(NULL, NULL);
 
 	/* Iterative loop */
 	while(modified)
@@ -290,7 +290,7 @@ static void *thread_loop(void *args)
 	}
 
 	free(sum);
-	migrate(0, NULL, NULL);
+	check_migrate(NULL, NULL);
 
 	return NULL;
 }

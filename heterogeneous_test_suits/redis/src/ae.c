@@ -466,11 +466,11 @@ int aeProcessEvents(aeEventLoop *eventLoop, int flags)
         }
     }
 
-    migrate(1, NULL, NULL);
+    // check_migrate(NULL, NULL);
     /* Check time events */
     if (flags & AE_TIME_EVENTS)
         processed += processTimeEvents(eventLoop);
-    migrate(0, NULL, NULL);
+    // migrate(0, NULL, NULL);
 
     return processed; /* return the number of processed file/time events */
 }
@@ -502,9 +502,10 @@ void aeMain(aeEventLoop *eventLoop) {
     while (!eventLoop->stop) {
         if (eventLoop->beforesleep != NULL)
             eventLoop->beforesleep(eventLoop);
-	//migrate(1, NULL, NULL);
+	    // check_migrate(NULL, NULL);
         aeProcessEvents(eventLoop, AE_ALL_EVENTS);
-	//migrate(0, NULL, NULL);
+	    check_migrate(NULL, NULL);
+        // printf("tid: %d\n", gettid());
     }
 }
 

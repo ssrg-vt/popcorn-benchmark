@@ -248,7 +248,7 @@ int main()
   }
 
   timer_start(T_bench);
-  migrate(1, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   if (timeron) timer_start(T_resid2);
   resid(u, v, r, n1, n2, n3, a, k);
@@ -271,7 +271,7 @@ int main()
 
   norm2u3(r, n1, n2, n3, &rnm2, &rnmu, nx[lt], ny[lt], nz[lt]);
 
-  migrate(0, NULL, NULL);
+  check_migrate(NULL, NULL);
   timer_stop(T_bench);
 
   t = timer_read(T_bench);

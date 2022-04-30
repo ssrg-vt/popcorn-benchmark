@@ -732,9 +732,9 @@ int main( int argc, char **argv )
     for( iteration=1; iteration<=MAX_ITERATIONS; iteration++ )
     {
         if( CLASS != 'S' ) printf( "        %d\n", iteration );
-		migrate(1, NULL, NULL);
+		check_migrate(NULL, NULL);
         rank( iteration );
-		migrate(0, NULL, NULL);
+		//migrate(0, NULL, NULL);
     }
 
 

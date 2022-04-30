@@ -331,7 +331,7 @@ int main(int argc, char *argv[])
   if (timeron) timer_stop(t_init);
 
   timer_clear(1);
-  migrate(1, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   time = 0.0;
   for (step = 0; step <= niter; step++) {
@@ -407,7 +407,7 @@ int main(int argc, char *argv[])
     }
     nelt_tot = nelt_tot + (double)(nelt);
   }
-  migrate(0, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   timer_stop(1);
   tmax = timer_read(1);

@@ -182,9 +182,9 @@ int main(int argc, char *argv[])
       printf(" Time step %4d\n", step);
     }
 
-	migrate(1, NULL, NULL);
+	check_migrate(NULL, NULL);
     adi();
-	migrate(0, NULL, NULL);
+	check_migrate(NULL, NULL);
   }
 
   timer_stop(1);

@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
   }
   timer_start(1);
 
-  migrate(1, NULL, NULL);
+  check_migrate(NULL, NULL);
   for (step = 1; step <= niter; step++) {
     if ((step % 20) == 0 || step == 1) {
       printf(" Time step %4d\n", step);
@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
 
     adi();
   }
-  migrate(0, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   timer_stop(1);
   tmax = timer_read(1);

@@ -71,7 +71,7 @@ void appft(int niter, double *total_time, logical *verified)
   timer_stop(2);
 
   timer_start(1);
-  migrate(1, NULL, NULL);
+  check_migrate(NULL, NULL);
   if (timers_enabled) timer_start(13);
 
   n12 = NX / 2;
@@ -110,7 +110,7 @@ void appft(int niter, double *total_time, logical *verified)
     CalculateChecksum(&sums[kt], kt, NX, NY, NZ, xnt);
     if (timers_enabled) timer_stop(10);
   }
-  migrate(0, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   // Verification test.
   if (timers_enabled) timer_start(14);

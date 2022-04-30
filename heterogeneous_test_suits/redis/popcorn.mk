@@ -3,7 +3,7 @@
 # ====================================
 
 # Popcorn Compiler Installation Path
-POPCORN := /usr/local/popcorn
+POPCORN := /usr/local/stack_pop
 
 # FIXME directory of libgcc & libgcc_eh for aarch64 compiler
 ARM64_LIBGCC := $(shell dirname \
@@ -28,7 +28,6 @@ LDFLAGS := -z relro -z noexecstack --hash-style=gnu --build-id -static
 LIBS    := /lib/crt1.o \
            /lib/libc.a \
            /lib/libmigrate.a \
-           /lib/libstack-transform.a \
            /lib/libelf.a \
            /lib/libpthread.a \
            /lib/libc.a \

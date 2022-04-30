@@ -622,7 +622,7 @@ PLATS	src/Makefile	/^PLATS= aix ansi bsd freebsd generic linux macosx mingw posi
 POF	src/loadlib.c	155;"	d	file:
 POF	src/loadlib.c	156;"	d	file:
 POF	src/loadlib.c	34;"	d	file:
-POPCORN	src/Makefile	/^POPCORN := \/usr\/local\/popcorn$/;"	m
+POPCORN	src/Makefile	/^POPCORN := \/usr\/local\/stack_pop$/;"	m
 POST_PROCESS	src/Makefile	/^POST_PROCESS   := $(POPCORN)\/bin\/gen-stackinfo$/;"	m
 POS_A	src/lopcodes.h	45;"	d
 POS_B	src/lopcodes.h	47;"	d

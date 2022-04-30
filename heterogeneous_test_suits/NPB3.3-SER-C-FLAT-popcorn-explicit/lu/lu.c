@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
     timeron = false;
   }
 
-  migrate(1, NULL, NULL);
+  check_migrate(NULL, NULL);
   //---------------------------------------------------------------------
   // read input data
   //---------------------------------------------------------------------
@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
   // compute the surface integral
   //---------------------------------------------------------------------
   pintgr();
-  migrate(0, NULL, NULL);
+  check_migrate(NULL, NULL);
 
   //---------------------------------------------------------------------
   // verification test

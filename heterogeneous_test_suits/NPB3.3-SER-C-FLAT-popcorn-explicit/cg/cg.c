@@ -297,11 +297,11 @@ int main(int argc, char *argv[])
     //---------------------------------------------------------------------
     // The call to the conjugate gradient routine:
     //---------------------------------------------------------------------
-	migrate(1, NULL, NULL);
+	check_migrate(NULL, NULL);
     if (timeron) timer_start(T_conj_grad);
     conj_grad(colidx, rowstr, x, z, a, p, q, r, &rnorm);
     if (timeron) timer_stop(T_conj_grad);
-	migrate(0, NULL, NULL);
+	check_migrate(NULL, NULL);
 
     //---------------------------------------------------------------------
     // zeta = shift + 1/(x.z)
