@@ -1,0 +1,1 @@
+/usr/local/popcorn/bin/x86_64-popcorn-linux-gnu-ld.gold -z relro -z noexecstack --hash-style=gnu --build-id -static -o build_aarch64/sqlite-bench-aarch64 \ 
