@@ -1,0 +1,1004 @@
+Archive member included because of file (symbol)
+
+/usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                              /usr/local/popcorn/x86_64/lib/crt1.o (__libc_start_main)
+/usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o) (exit)
+/usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o) (__hwcap)
+/usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+                              linpack-pc_x86_64.o (fprintf)
+/usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+                              linpack-pc_x86_64.o (stderr)
+/usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o) (vfprintf)
+/usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (strnlen)
+/usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+                              linpack-pc_x86_64.o (memset)
+/usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+                              linpack-pc_x86_64.o (clock)
+/usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(clock.o) (__clock_gettime)
+/usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o) (__environ)
+/usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o) (__init_tls)
+/usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (__errno_location)
+/usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (strerror)
+/usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(exit.o) (_Exit)
+/usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o) (__syscall_ret)
+/usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(strerror.o) (__lctrans)
+/usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (__fpclassifyl)
+/usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (__signbitl)
+/usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (frexpl)
+/usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (wctomb)
+/usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (__lockfile)
+/usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(stderr.o) (__stdio_close)
+/usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(stderr.o) (__stdio_seek)
+/usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(stderr.o) (__stdio_write)
+/usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o) (__fwritex)
+/usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o) (memchr)
+/usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o) (memcpy)
+/usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o) (__wait)
+/usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o) (__set_thread_area)
+/usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o) (wcrtomb)
+/usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o) (__towrite)
+/usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o) (__stdio_exit_needed)
+/usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o) (__ofl_lock)
+/usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+                              /usr/local/popcorn/x86_64/lib/libc.a(ofl.o) (__lock)
+/usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+                              linpack-pc_x86_64.o (check_migrate)
+
+Allocating common symbols
+Common symbol       size              file
+
+__libc              0x70              /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+__hwcap             0x8               /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+__sysinfo           0x8               /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+
+Discarded input sections
+
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 linpack-pc_x86_64.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .note.GNU-stack
+                0x0000000000000000        0x0 0x1 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+Memory map
+
+ ** file header
+                0x00000000004ff000       0x40
+ ** segment headers
+                0x00000000004ff040      0x1f8
+
+.text           0x0000000000500000     0x73ec
+ ** zero fill   0x0000000000500000        0x1
+ ** zero fill   0x0000000000500001      0xfff
+ .text.exit     0x0000000000501000       0x1d 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+                0x0000000000501000                exit
+ ** zero fill   0x000000000050101d        0x7
+ ** zero fill   0x0000000000501024        0xc
+ .text.second   0x0000000000501030       0x4f 0x10 linpack-pc_x86_64.o
+                0x0000000000501030                second
+ ** zero fill   0x000000000050107f       0x15
+ ** zero fill   0x0000000000501094        0xc
+ .text.what_date
+                0x00000000005010a0        0xf 0x10 linpack-pc_x86_64.o
+                0x00000000005010a0                what_date
+ ** zero fill   0x00000000005010af        0xd
+ ** zero fill   0x00000000005010bc        0x4
+ .text.main     0x00000000005010c0     0x107a 0x10 linpack-pc_x86_64.o
+                0x00000000005010c0                main
+ ** zero fill   0x000000000050213a        0x6
+ .text.matgen   0x0000000000502140      0x25b 0x10 linpack-pc_x86_64.o
+                0x0000000000502140                matgen
+ ** zero fill   0x000000000050239b       0x21
+ ** zero fill   0x00000000005023bc        0x4
+ .text.dgefa    0x00000000005023c0      0x396 0x10 linpack-pc_x86_64.o
+                0x00000000005023c0                dgefa
+ ** zero fill   0x0000000000502756       0x22
+ ** zero fill   0x0000000000502778        0x8
+ .text.dgesl    0x0000000000502780      0x41d 0x10 linpack-pc_x86_64.o
+                0x0000000000502780                dgesl
+ ** zero fill   0x0000000000502b9d        0x3
+ .text.dmxpy    0x0000000000502ba0      0x78f 0x10 linpack-pc_x86_64.o
+                0x0000000000502ba0                dmxpy
+ ** zero fill   0x000000000050332f        0x1
+ .text.epslon   0x0000000000503330       0xeb 0x10 linpack-pc_x86_64.o
+                0x0000000000503330                epslon
+ ** zero fill   0x000000000050341b        0x5
+ .text.print_time
+                0x0000000000503420       0x24 0x10 linpack-pc_x86_64.o
+                0x0000000000503420                print_time
+ ** zero fill   0x0000000000503444       0x1c
+ .text.idamax   0x0000000000503460      0x231 0x10 linpack-pc_x86_64.o
+                0x0000000000503460                idamax
+ ** zero fill   0x0000000000503691        0xf
+ .text.dscal    0x00000000005036a0      0x12d 0x10 linpack-pc_x86_64.o
+                0x00000000005036a0                dscal
+ ** zero fill   0x00000000005037cd       0x17
+ ** zero fill   0x00000000005037e4        0xc
+ .text.daxpy    0x00000000005037f0      0x203 0x10 linpack-pc_x86_64.o
+                0x00000000005037f0                daxpy
+ ** zero fill   0x00000000005039f3        0x5
+ ** zero fill   0x00000000005039f8        0x8
+ .text.ddot     0x0000000000503a00      0x1ff 0x10 linpack-pc_x86_64.o
+                0x0000000000503a00                ddot
+ ** zero fill   0x0000000000503bff        0x5
+ .text._start_c
+                0x0000000000503c04       0x1f 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+                0x0000000000503c04                _start_c
+ ** zero fill   0x0000000000503c23       0x11
+ .text.dummy    0x0000000000503c34        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x0000000000503c34                _init
+ ** zero fill   0x0000000000503c35        0x3
+ .text.dummy1   0x0000000000503c38        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x0000000000503c38                __init_ssp
+ ** zero fill   0x0000000000503c39        0x3
+ .text.__init_libc
+                0x0000000000503c3c      0x19f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x0000000000503c3c                __init_libc
+ ** zero fill   0x0000000000503ddb       0x41
+ .text.libc_start_init
+                0x0000000000503e1c       0x31 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x0000000000503e1c                __libc_start_init
+ ** zero fill   0x0000000000503e4d       0x1b
+ .text.__libc_start_main
+                0x0000000000503e68       0x43 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x0000000000503e68                __libc_start_main
+ ** zero fill   0x0000000000503eab        0xd
+ .text.libc_exit_fini
+                0x0000000000503eb8       0x35 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+                0x0000000000503eb8                __libc_exit_fini
+ ** zero fill   0x0000000000503eed       0x13
+ .text.dummy    0x0000000000503f00        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+                0x0000000000503f00                __funcs_on_exit
+                0x0000000000503f00                _fini
+ ** zero fill   0x0000000000503f01        0x3
+ .text.fprintf  0x0000000000503f04       0x81 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+                0x0000000000503f04                fprintf
+ ** zero fill   0x0000000000503f85        0x3
+ .text.vfprintf
+                0x0000000000503f88      0x1ab 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000503f88                vfprintf
+ ** zero fill   0x0000000000504133        0x1
+ .text.printf_core
+                0x0000000000504134     0x1bc3 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ ** zero fill   0x0000000000505cf7        0x1
+ .text.pop_arg  0x0000000000505cf8      0x1cc 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ ** zero fill   0x0000000000505ec4       0xa0
+ .text.pad      0x0000000000505f64       0xbc 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ ** zero fill   0x0000000000506020       0x1c
+ ** zero fill   0x000000000050603c        0x4
+ .text.strnlen  0x0000000000506040       0x2c 0x10 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+                0x0000000000506040                strnlen
+ ** zero fill   0x000000000050606c        0xc
+ .text.memset   0x0000000000506078       0xc4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+                0x0000000000506078                memset
+ ** zero fill   0x000000000050613c       0x7c
+ .text.clock    0x00000000005061b8       0x82 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+                0x00000000005061b8                clock
+ ** zero fill   0x000000000050623a        0x6
+ .text.__clock_gettime
+                0x0000000000506240       0x56 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+                0x0000000000506240                __clock_gettime
+                0x0000000000506240                clock_gettime
+ ** zero fill   0x0000000000506296       0x1a
+ .text.__init_tp
+                0x00000000005062b0       0x50 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+                0x00000000005062b0                __init_tp
+ ** zero fill   0x0000000000506300       0x20
+ .text.__copy_tls
+                0x0000000000506320       0xa5 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+                0x0000000000506320                __copy_tls
+ ** zero fill   0x00000000005063c5        0x3
+ .text.static_init_tls
+                0x00000000005063c8      0x142 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+                0x00000000005063c8                __init_tls
+ ** zero fill   0x000000000050650a        0x2
+ .text.__errno_location
+                0x000000000050650c        0xe 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+                0x000000000050650c                __errno_location
+ ** zero fill   0x000000000050651a        0x2
+ .text.__strerror_l
+                0x000000000050651c       0x44 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+                0x000000000050651c                __strerror_l
+                0x000000000050651c                strerror_l
+ ** zero fill   0x0000000000506560       0x20
+ .text.strerror
+                0x0000000000506580       0x15 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+                0x0000000000506580                strerror
+ ** zero fill   0x0000000000506595        0x3
+ .text._Exit    0x0000000000506598       0x13 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+                0x0000000000506598                _Exit
+ ** zero fill   0x00000000005065ab        0xd
+ ** zero fill   0x00000000005065b8        0x8
+ .text.__syscall_ret
+                0x00000000005065c0       0x22 0x10 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+                0x00000000005065c0                __syscall_ret
+ ** zero fill   0x00000000005065e2        0xe
+ .text.dummy    0x00000000005065f0        0x4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+                0x00000000005065f0                __lctrans_impl
+ .text.__lctrans
+                0x00000000005065f4        0x5 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+                0x00000000005065f4                __lctrans
+ ** zero fill   0x00000000005065f9        0x3
+ .text.__lctrans_cur
+                0x00000000005065fc       0x19 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+                0x00000000005065fc                __lctrans_cur
+ ** zero fill   0x0000000000506615        0x3
+ .text.__fpclassifyl
+                0x0000000000506618       0x4e 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+                0x0000000000506618                __fpclassifyl
+ ** zero fill   0x0000000000506666        0x2
+ .text.__signbitl
+                0x0000000000506668        0xa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+                0x0000000000506668                __signbitl
+ ** zero fill   0x0000000000506672        0xa
+ .text.frexpl   0x000000000050667c       0x7f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+                0x000000000050667c                frexpl
+ ** zero fill   0x00000000005066fb       0x35
+ .text.wctomb   0x0000000000506730       0x15 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+                0x0000000000506730                wctomb
+ ** zero fill   0x0000000000506745        0x7
+ .text.__lockfile
+                0x000000000050674c       0x73 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+                0x000000000050674c                __lockfile
+ ** zero fill   0x00000000005067bf        0x1
+ .text.__unlockfile
+                0x00000000005067c0       0x46 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+                0x00000000005067c0                __unlockfile
+ ** zero fill   0x0000000000506806        0x6
+ .text.dummy    0x000000000050680c        0x3 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+                0x000000000050680c                __aio_close
+ ** zero fill   0x000000000050680f        0x1
+ .text.__stdio_close
+                0x0000000000506810       0x1c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+                0x0000000000506810                __stdio_close
+ ** zero fill   0x000000000050682c        0xc
+ .text.__stdio_seek
+                0x0000000000506838       0x16 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+                0x0000000000506838                __stdio_seek
+ ** zero fill   0x000000000050684e        0x2
+ .text.__stdio_write
+                0x0000000000506850      0x117 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+                0x0000000000506850                __stdio_write
+ ** zero fill   0x0000000000506967       0x15
+ .text.__fwritex
+                0x000000000050697c       0xbb 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+                0x000000000050697c                __fwritex
+ ** zero fill   0x0000000000506a37       0x3d
+ .text.fwrite   0x0000000000506a74       0x8a 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+                0x0000000000506a74                fwrite
+                0x0000000000506a74                fwrite_unlocked
+ ** zero fill   0x0000000000506afe       0x12
+ .text.memchr   0x0000000000506b10       0xb2 0x10 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+                0x0000000000506b10                memchr
+ ** zero fill   0x0000000000506bc2        0x2
+ .text.memcpy   0x0000000000506bc4       0x32 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+                0x0000000000506bc4                __memcpy_fwd
+                0x0000000000506bc4                memcpy
+ ** zero fill   0x0000000000506bf6      0x3ce
+ .text.__wait   0x0000000000506fc4       0x78 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+                0x0000000000506fc4                __wait
+ ** zero fill   0x000000000050703c       0x4c
+ ** zero fill   0x0000000000507088        0x8
+ .text.__set_thread_area
+                0x0000000000507090       0x10 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+                0x0000000000507090                __set_thread_area
+ .text.wcrtomb  0x00000000005070a0       0xfd 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+                0x00000000005070a0                wcrtomb
+ ** zero fill   0x000000000050719d        0xb
+ .text.__towrite
+                0x00000000005071a8       0x40 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+                0x00000000005071a8                __towrite
+ ** zero fill   0x00000000005071e8        0xc
+ .text.__towrite_needs_stdio_exit
+                0x00000000005071f4        0x5 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+                0x00000000005071f4                __towrite_needs_stdio_exit
+ ** zero fill   0x00000000005071f9        0x3
+ .text.__stdio_exit
+                0x00000000005071fc       0x35 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+                0x00000000005071fc                __stdio_exit
+                0x00000000005071fc                __stdio_exit_needed
+ ** zero fill   0x0000000000507231       0x13
+ .text.close_file
+                0x0000000000507244       0x4b 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ ** zero fill   0x000000000050728f       0x29
+ .text.__ofl_lock
+                0x00000000005072b8       0x12 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+                0x00000000005072b8                __ofl_lock
+ ** zero fill   0x00000000005072ca       0x12
+ .text.__ofl_unlock
+                0x00000000005072dc        0xa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+                0x00000000005072dc                __ofl_unlock
+ ** zero fill   0x00000000005072e6        0x2
+ .text.__lock   0x00000000005072e8       0x47 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+                0x00000000005072e8                __lock
+ ** zero fill   0x000000000050732f       0x19
+ .text.__unlock
+                0x0000000000507348       0x3d 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+                0x0000000000507348                __unlock
+ ** zero fill   0x0000000000507385       0x17
+ ** zero fill   0x000000000050739c        0x4
+ .text.check_migrate
+                0x00000000005073a0       0x24 0x10 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+                0x00000000005073a0                check_migrate
+ ** zero fill   0x00000000005073c4       0x10
+ .text          0x00000000005073d4        0x0 0x4 linpack-pc_x86_64.o
+ .text          0x00000000005073d4       0x16 0x4 /usr/local/popcorn/x86_64/lib/crt1.o
+                0x00000000005073d4                _start
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .text          0x00000000005073ec        0x0 0x4 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+.rodata         0x0000000000600000     0x1e3c
+ ** zero fill   0x0000000000600000        0x1
+ ** zero fill   0x0000000000600001      0xfff
+ .rodata.linpack_pc__str_INSERT_COM
+                0x0000000000601000       0x1a 0x1 linpack-pc_x86_64.o
+                0x0000000000601000                linpack_pc__str_INSERT_COM
+ .rodata.linpack_pc__str_1_INSERT_OPT
+                0x000000000060101a       0x21 0x1 linpack-pc_x86_64.o
+                0x000000000060101a                linpack_pc__str_1_INSERT_OPT
+ .rodata.linpack_pc__str_2_Rolled__
+                0x000000000060103b        0x8 0x1 linpack-pc_x86_64.o
+                0x000000000060103b                linpack_pc__str_2_Rolled__
+ .rodata.linpack_pc__str_3_Single__
+                0x0000000000601043        0x8 0x1 linpack-pc_x86_64.o
+                0x0000000000601043                linpack_pc__str_3_Single__
+ .rodata.linpack_pc__str_4_Precision_
+                0x000000000060104b       0x36 0x1 linpack-pc_x86_64.o
+                0x000000000060104b                linpack_pc__str_4_Precision_
+ .rodata.linpack_pc__str_5_Compiler__
+                0x0000000000601081       0x11 0x1 linpack-pc_x86_64.o
+                0x0000000000601081                linpack_pc__str_5_Compiler__
+ .rodata.linpack_pc__str_6_Optimisati
+                0x0000000000601092       0x12 0x1 linpack-pc_x86_64.o
+                0x0000000000601092                linpack_pc__str_6_Optimisati
+ .rodata.linpack_pc__str_7_norm_resid
+                0x00000000006010a4       0x27 0x1 linpack-pc_x86_64.o
+                0x00000000006010a4                linpack_pc__str_7_norm_resid
+ .rodata.linpack_pc__str_8__________x
+                0x00000000006010cb       0x23 0x1 linpack-pc_x86_64.o
+                0x00000000006010cb                linpack_pc__str_8__________x
+ .rodata.linpack_pc__str_9__6_1f__17_
+                0x00000000006010ee       0x21 0x1 linpack-pc_x86_64.o
+                0x00000000006010ee                linpack_pc__str_9__6_1f__17_
+ .rodata.linpack_pc__str_10_Times_are_
+                0x000000000060110f       0x35 0x1 linpack-pc_x86_64.o
+                0x000000000060110f                linpack_pc__str_10_Times_are_
+ .rodata.linpack_pc__str_11_1_pass_tim
+                0x0000000000601144       0x36 0x1 linpack-pc_x86_64.o
+                0x0000000000601144                linpack_pc__str_11_1_pass_tim
+ .rodata.linpack_pc__str_12_______dgef
+                0x000000000060117a       0x38 0x1 linpack-pc_x86_64.o
+                0x000000000060117a                linpack_pc__str_12_______dgef
+ .rodata.linpack_pc__str_13_______rati
+                0x00000000006011b2        0xd 0x1 linpack-pc_x86_64.o
+                0x00000000006011b2                linpack_pc__str_13_______rati
+ .rodata.linpack_pc__str_14__Calculati
+                0x00000000006011bf       0x1e 0x1 linpack-pc_x86_64.o
+                0x00000000006011bf                linpack_pc__str_14__Calculati
+ .rodata.linpack_pc__str_15__10d_times
+                0x00000000006011dd       0x1a 0x1 linpack-pc_x86_64.o
+                0x00000000006011dd                linpack_pc__str_15__10d_times
+ .rodata.linpack_pc__str_16_Overhead_f
+                0x00000000006011f7       0x27 0x1 linpack-pc_x86_64.o
+                0x00000000006011f7                linpack_pc__str_16_Overhead_f
+ .rodata.linpack_pc__str_17_Calculatin
+                0x000000000060121e       0x2f 0x1 linpack-pc_x86_64.o
+                0x000000000060121e                linpack_pc__str_17_Calculatin
+ .rodata.linpack_pc__str_18_Passes_use
+                0x000000000060124d       0x14 0x1 linpack-pc_x86_64.o
+                0x000000000060124d                linpack_pc__str_18_Passes_use
+ .rodata.linpack_pc__str_19_Times_for_
+                0x0000000000601261       0x2f 0x1 linpack-pc_x86_64.o
+                0x0000000000601261                linpack_pc__str_19_Times_for_
+ .rodata.linpack_pc__str_20_Average___
+                0x0000000000601290       0x29 0x1 linpack-pc_x86_64.o
+                0x0000000000601290                linpack_pc__str_20_Average___
+ .rodata.linpack_pc__str_21__Calculati
+                0x00000000006012b9       0x1f 0x1 linpack-pc_x86_64.o
+                0x00000000006012b9                linpack_pc__str_21__Calculati
+ .rodata.src_env___libc_start_main__str_
+                0x00000000006012d8        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x00000000006012d8                src_env___libc_start_main__str_
+ ** zero fill   0x00000000006012d9        0x7
+ .rodata.src_env___libc_start_main___const___init_libc_pfd_
+                0x00000000006012e0       0x18 0x10 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x00000000006012e0                src_env___libc_start_main___const___init_libc_pfd_
+ .rodata.src_env___libc_start_main__str_1__dev_null_
+                0x00000000006012f8        0xa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x00000000006012f8                src_env___libc_start_main__str_1__dev_null_
+ ** zero fill   0x0000000000601302        0x6
+ .rodata.stderr
+                0x0000000000601308        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+                0x0000000000601308                stderr
+ .rodata.printf_core
+                0x0000000000601310      0x170 0x8 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .rodata.pop_arg
+                0x0000000000601480       0x90 0x8 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .rodata.src_stdio_vfprintf__str______0X0x_
+                0x0000000000601510        0xa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000601510                src_stdio_vfprintf__str______0X0x_
+ .rodata.src_stdio_vfprintf__str_1__null__
+                0x000000000060151a        0x7 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x000000000060151a                src_stdio_vfprintf__str_1__null__
+ ** zero fill   0x0000000000601521        0xf
+ .rodata.src_stdio_vfprintf_c_states
+                0x0000000000601530      0x1d0 0x10 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .rodata.src_stdio_vfprintf__str_3__0X_0X_0X_
+                0x0000000000601700       0x13 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000601700                src_stdio_vfprintf__str_3__0X_0X_0X_
+ .rodata.src_stdio_vfprintf__str_4_inf_
+                0x0000000000601713        0x4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000601713                src_stdio_vfprintf__str_4_inf_
+ .rodata.src_stdio_vfprintf__str_5_INF_
+                0x0000000000601717        0x4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000601717                src_stdio_vfprintf__str_5_INF_
+ .rodata.src_stdio_vfprintf__str_6_nan_
+                0x000000000060171b        0x4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x000000000060171b                src_stdio_vfprintf__str_6_nan_
+ .rodata.src_stdio_vfprintf__str_7_NAN_
+                0x000000000060171f        0x4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x000000000060171f                src_stdio_vfprintf__str_7_NAN_
+ .rodata.src_stdio_vfprintf__str_8___
+                0x0000000000601723        0x2 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+                0x0000000000601723                src_stdio_vfprintf__str_8___
+ ** zero fill   0x0000000000601725        0xb
+ .rodata.src_errno_strerror_c_errmsg
+                0x0000000000601730      0x70c 0x10 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+
+.rodata.cst4    0x0000000000601e3c       0x28
+ ** merge constants
+                0x0000000000601e3c       0x28
+
+.rodata.cst8    0x0000000000601e68       0x40
+ ** merge constants
+                0x0000000000601e68       0x40
+
+.rodata.cst16   0x0000000000601eb0       0x30
+ ** merge constants
+                0x0000000000601eb0       0x30
+
+.rodata.src_stdio_vfprintf_c_xdigits
+                0x0000000000601ee0       0x10
+ ** merge constants
+                0x0000000000601ee0       0x10
+
+.rodata.src_errno_strerror_c_errid
+                0x0000000000601ef0       0x58
+ ** merge strings
+                0x0000000000601ef0       0x58
+
+.data           0x0000000000700000     0x10f4
+ ** zero fill   0x0000000000700000        0x1
+ ** zero fill   0x0000000000700001      0xfff
+ .data.src_stdio_stderr_c_f
+                0x0000000000701000       0xe8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .data.__stderr_used
+                0x00000000007010e8        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+                0x00000000007010e8                __stderr_used
+ .data.__indicator
+                0x00000000007010f0        0x4 0x4 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+                0x00000000007010f0                __indicator
+
+.bss            0x0000000000800000    0x502e0
+ ** common      0x0000000000800000       0x80
+ ** zero fill   0x0000000000800080        0x1
+ ** zero fill   0x0000000000800081      0xf7f
+ .bss.linpack_pc_c_main_aa
+                0x0000000000801000    0x27100 0x10 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_a
+                0x0000000000828100    0x27420 0x10 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_b
+                0x000000000084f520      0x320 0x10 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_x
+                0x000000000084f840      0x320 0x10 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_ipvt
+                0x000000000084fb60      0x320 0x10 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_n
+                0x000000000084fe80        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_i
+                0x000000000084fe84        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_j
+                0x000000000084fe88        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_ntimes
+                0x000000000084fe8c        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_info
+                0x000000000084fe90        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_lda
+                0x000000000084fe94        0x4 0x4 linpack-pc_x86_64.o
+ .bss.linpack_pc_c_main_ldaa
+                0x000000000084fe98        0x4 0x4 linpack-pc_x86_64.o
+ ** zero fill   0x000000000084fe9c        0x4
+ .bss.linpack_pc_c_atime
+                0x000000000084fea0      0x21c 0x10 linpack-pc_x86_64.o
+ ** zero fill   0x00000000008500bc        0x4
+ .bss.__popcorn_stack_base
+                0x00000000008500c0        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+                0x00000000008500c0                __popcorn_stack_base
+ .bss.__progname
+                0x00000000008500c8        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+                0x00000000008500c8                __progname
+                0x00000000008500c8                program_invocation_short_name
+ .bss.__progname_full
+                0x00000000008500d0        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+                0x00000000008500d0                __progname_full
+                0x00000000008500d0                program_invocation_name
+ .bss.src_stdio_stderr_c_buf
+                0x00000000008500d8        0x8 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .bss.__environ
+                0x00000000008500e0        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+                0x00000000008500e0                ___environ
+                0x00000000008500e0                __environ
+                0x00000000008500e0                _environ
+                0x00000000008500e0                environ
+ .bss.src_env___init_tls_c_main_tls
+                0x00000000008500e8       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ ** zero fill   0x0000000000850118        0x8
+ .bss.src_env___init_tls_c_builtin_tls
+                0x0000000000850120      0x1a8 0x10 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .bss.src_stdio___stdio_exit_c_dummy_file
+                0x00000000008502c8        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+                0x00000000008502c8                __stdin_used
+                0x00000000008502c8                __stdout_used
+ .bss.src_stdio_ofl_c_ofl_lock
+                0x00000000008502d0        0x8 0x4 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .bss.src_stdio_ofl_c_ofl_head
+                0x00000000008502d8        0x8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+
+.ldata          0x00000000008522e0        0x0
+
+.eh_frame       0x00000000008522e0      0x250
+ ** eh_frame    0x00000000008522e0      0x250
+
+.tdata          0x0000000000900000     0x1000
+ ** zero fill   0x0000000000900000        0x1
+ ** zero fill   0x0000000000900001      0xfff
+
+.tbss           0x0000000000a00000     0x1000
+ ** zero fill   0x0000000000a00000        0x1
+ ** zero fill   0x0000000000a00001      0xfff
+
+.llvm_pcn_stackmaps
+                0x0000000000a01000     0x3e00
+ .llvm_pcn_stackmaps
+                0x0000000000a01000     0x3db0 0x8 linpack-pc_x86_64.o
+ .llvm_pcn_stackmaps
+                0x0000000000a04db0       0x50 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+
+.debug_str      0x0000000000000000     0x109e
+ ** merge strings
+                0x0000000000000000     0x109e
+
+.debug_abbrev   0x0000000000000000     0x1fbe
+ .debug_abbrev  0x0000000000000000      0x10b 0x1 linpack-pc_x86_64.o
+ .debug_abbrev  0x000000000000010b       0x5e 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_abbrev  0x0000000000000169      0x1a7 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_abbrev  0x0000000000000310       0x97 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_abbrev  0x00000000000003a7       0x93 0x1 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .debug_abbrev  0x000000000000043a       0xdc 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_abbrev  0x0000000000000516       0xbf 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .debug_abbrev  0x00000000000005d5      0x26c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_abbrev  0x0000000000000841       0x6f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_abbrev  0x00000000000008b0       0x7b 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .debug_abbrev  0x000000000000092b       0xe2 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_abbrev  0x0000000000000a0d       0x33 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .debug_abbrev  0x0000000000000a40      0x1ba 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_abbrev  0x0000000000000bfa      0x123 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_abbrev  0x0000000000000d1d      0x155 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_abbrev  0x0000000000000e72       0xa4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_abbrev  0x0000000000000f16       0x45 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_abbrev  0x0000000000000f5b      0x152 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_abbrev  0x00000000000010ad       0x95 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_abbrev  0x0000000000001142       0x88 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .debug_abbrev  0x00000000000011ca       0x8f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_abbrev  0x0000000000001259       0x59 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_abbrev  0x00000000000012b2      0x1ab 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_abbrev  0x000000000000145d      0x135 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_abbrev  0x0000000000001592      0x120 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_abbrev  0x00000000000016b2      0x14f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_abbrev  0x0000000000001801       0xfa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_abbrev  0x00000000000018fb       0x82 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_abbrev  0x000000000000197d       0xf1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_abbrev  0x0000000000001a6e      0x151 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_abbrev  0x0000000000001bbf       0xdc 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_abbrev  0x0000000000001c9b       0xf8 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_abbrev  0x0000000000001d93       0xde 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_abbrev  0x0000000000001e71       0xd8 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .debug_abbrev  0x0000000000001f49       0x75 0x1 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+.debug_info     0x0000000000000000     0x6c66
+ .debug_info    0x0000000000000000      0x995 0x1 linpack-pc_x86_64.o
+ .debug_info    0x0000000000000995       0x93 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_info    0x0000000000000a28      0x323 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_info    0x0000000000000d4b       0xb0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_info    0x0000000000000dfb      0x1d7 0x1 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .debug_info    0x0000000000000fd2      0x124 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_info    0x00000000000010f6      0x336 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .debug_info    0x000000000000142c     0x119d 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_info    0x00000000000025c9       0x95 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_info    0x000000000000265e       0x95 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .debug_info    0x00000000000026f3      0x16b 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_info    0x000000000000285e       0x45 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .debug_info    0x00000000000028a3      0x79d 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_info    0x0000000000003040      0x3a8 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_info    0x00000000000033e8      0x4a0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_info    0x0000000000003888       0xe4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_info    0x000000000000396c       0x62 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_info    0x00000000000039ce      0x470 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_info    0x0000000000003e3e       0xec 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_info    0x0000000000003f2a       0xd3 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .debug_info    0x0000000000003ffd       0xf6 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_info    0x00000000000040f3       0x81 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_info    0x0000000000004174      0x7df 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_info    0x0000000000004953      0x385 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_info    0x0000000000004cd8      0x3ad 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_info    0x0000000000005085      0x427 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_info    0x00000000000054ac      0x3df 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_info    0x000000000000588b       0xf3 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_info    0x000000000000597e      0x227 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_info    0x0000000000005ba5      0x467 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_info    0x000000000000600c      0x314 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_info    0x0000000000006320      0x33c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_info    0x000000000000665c      0x341 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_info    0x000000000000699d      0x23e 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .debug_info    0x0000000000006bdb       0x8b 0x1 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+.debug_ranges   0x0000000000000000      0x960
+ .debug_ranges  0x0000000000000000       0xe0 0x1 linpack-pc_x86_64.o
+ .debug_ranges  0x00000000000000e0       0x90 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_ranges  0x0000000000000170       0x40 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_ranges  0x00000000000001b0      0x520 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_ranges  0x00000000000006d0       0x40 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_ranges  0x0000000000000710       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_ranges  0x0000000000000740       0x40 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_ranges  0x0000000000000780       0x60 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_ranges  0x00000000000007e0       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_ranges  0x0000000000000810       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_ranges  0x0000000000000840       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_ranges  0x0000000000000870       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_ranges  0x00000000000008a0       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_ranges  0x00000000000008d0       0x30 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_ranges  0x0000000000000900       0x60 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+
+.debug_macinfo  0x0000000000000000       0x23
+ .debug_macinfo
+                0x0000000000000000        0x1 0x1 linpack-pc_x86_64.o
+ .debug_macinfo
+                0x0000000000000001        0x1 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_macinfo
+                0x0000000000000002        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_macinfo
+                0x0000000000000003        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_macinfo
+                0x0000000000000004        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .debug_macinfo
+                0x0000000000000005        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_macinfo
+                0x0000000000000006        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .debug_macinfo
+                0x0000000000000007        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_macinfo
+                0x0000000000000008        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_macinfo
+                0x0000000000000009        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .debug_macinfo
+                0x000000000000000a        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_macinfo
+                0x000000000000000b        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .debug_macinfo
+                0x000000000000000c        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_macinfo
+                0x000000000000000d        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_macinfo
+                0x000000000000000e        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_macinfo
+                0x000000000000000f        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_macinfo
+                0x0000000000000010        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_macinfo
+                0x0000000000000011        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_macinfo
+                0x0000000000000012        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_macinfo
+                0x0000000000000013        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .debug_macinfo
+                0x0000000000000014        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_macinfo
+                0x0000000000000015        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_macinfo
+                0x0000000000000016        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_macinfo
+                0x0000000000000017        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_macinfo
+                0x0000000000000018        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_macinfo
+                0x0000000000000019        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_macinfo
+                0x000000000000001a        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_macinfo
+                0x000000000000001b        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_macinfo
+                0x000000000000001c        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_macinfo
+                0x000000000000001d        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_macinfo
+                0x000000000000001e        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_macinfo
+                0x000000000000001f        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_macinfo
+                0x0000000000000020        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_macinfo
+                0x0000000000000021        0x1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .debug_macinfo
+                0x0000000000000022        0x1 0x1 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+.comment        0x0000000000000000       0x69
+ ** merge strings
+                0x0000000000000000       0x69
+
+.stack_transform.unwind
+                0x0000000000000000      0x11c
+ .stack_transform.unwind
+                0x0000000000000000      0x104 0x4 linpack-pc_x86_64.o
+ .stack_transform.unwind
+                0x0000000000000104       0x18 0x4 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+
+.stack_transform.unwind_arange
+                0x0000000000000000       0xe0
+ .stack_transform.unwind_arange
+                0x0000000000000000       0xd0 0x8 linpack-pc_x86_64.o
+ .stack_transform.unwind_arange
+                0x00000000000000d0       0x10 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+
+.debug_line     0x0000000000000000     0x4a51
+ .debug_line    0x0000000000000000     0x1828 0x1 linpack-pc_x86_64.o
+ .debug_line    0x0000000000001828       0x49 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_line    0x0000000000001871      0x24b 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_line    0x0000000000001abc       0xb4 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_line    0x0000000000001b70       0x6d 0x1 /usr/local/popcorn/x86_64/lib/libc.a(libc.o)
+ .debug_line    0x0000000000001bdd       0x72 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_line    0x0000000000001c4f       0x7c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(stderr.o)
+ .debug_line    0x0000000000001ccb     0x1396 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_line    0x0000000000003061       0x71 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_line    0x00000000000030d2       0x86 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+ .debug_line    0x0000000000003158       0x94 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .debug_line    0x00000000000031ec       0xd8 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_line    0x00000000000032c4       0x35 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__environ.o)
+ .debug_line    0x00000000000032f9      0x293 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_line    0x000000000000358c       0xdf 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_line    0x000000000000366b      0x13f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_line    0x00000000000037aa       0x72 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_line    0x000000000000381c       0x64 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_line    0x0000000000003880      0x11c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_line    0x000000000000399c       0xbb 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_line    0x0000000000003a57       0x88 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .debug_line    0x0000000000003adf       0xbe 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_line    0x0000000000003b9d       0x81 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_line    0x0000000000003c1e      0x18f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_line    0x0000000000003dad       0xd9 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_line    0x0000000000003e86       0xc5 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_line    0x0000000000003f4b      0x16c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_line    0x00000000000040b7      0x157 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_line    0x000000000000420e       0xd9 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_line    0x00000000000042e7       0x61 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+ .debug_line    0x0000000000004348      0x100 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_line    0x0000000000004448       0x6c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+ .debug_line    0x00000000000044b4      0x192 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_line    0x0000000000004646       0xe1 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_line    0x0000000000004727      0x10a 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_line    0x0000000000004831       0xaa 0x1 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_line    0x00000000000048db      0x11f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+ .debug_line    0x00000000000049fa       0x57 0x1 /usr/local/popcorn/x86_64/lib/libmigrate.a(migrate.o)
+
+.debug_loc      0x0000000000000000     0x5b9c
+ .debug_loc     0x0000000000000000       0x69 0x1 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_loc     0x0000000000000069      0x391 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_loc     0x00000000000003fa       0x6c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_loc     0x0000000000000466       0x69 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_loc     0x00000000000004cf     0x36e9 0x1 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_loc     0x0000000000003bb8       0x8f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_loc     0x0000000000003c47      0x18c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_loc     0x0000000000003dd3      0x4d0 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_loc     0x00000000000042a3       0x23 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_loc     0x00000000000042c6      0x16c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_loc     0x0000000000004432       0x46 0x1 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_loc     0x0000000000004478       0x36 0x1 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_loc     0x00000000000044ae       0xc2 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_loc     0x0000000000004570       0x49 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_loc     0x00000000000045b9       0xf7 0x1 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_loc     0x00000000000046b0       0x6c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_loc     0x000000000000471c      0x369 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_loc     0x0000000000004a85       0x9f 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_loc     0x0000000000004b24       0xf5 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_loc     0x0000000000004c19      0x32e 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_loc     0x0000000000004f47      0x2da 0x1 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_loc     0x0000000000005221      0x144 0x1 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_loc     0x0000000000005365      0x337 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_loc     0x000000000000569c      0x1db 0x1 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_loc     0x0000000000005877       0x6c 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_loc     0x00000000000058e3      0x2b9 0x1 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+
+.debug_frame    0x0000000000000000      0xb48
+ .debug_frame   0x0000000000000000       0x38 0x8 /usr/local/popcorn/x86_64/lib/crt1.o
+ .debug_frame   0x0000000000000038       0xe8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__libc_start_main.o)
+ .debug_frame   0x0000000000000120       0x80 0x8 /usr/local/popcorn/x86_64/lib/libc.a(exit.o)
+ .debug_frame   0x00000000000001a0       0x38 0x8 /usr/local/popcorn/x86_64/lib/libc.a(fprintf.o)
+ .debug_frame   0x00000000000001d8      0x130 0x8 /usr/local/popcorn/x86_64/lib/libc.a(vfprintf.o)
+ .debug_frame   0x0000000000000308       0x48 0x8 /usr/local/popcorn/x86_64/lib/libc.a(strnlen.o)
+ .debug_frame   0x0000000000000350       0x40 0x8 /usr/local/popcorn/x86_64/lib/libc.a(memset.o)
+ .debug_frame   0x0000000000000390       0x38 0x8 /usr/local/popcorn/x86_64/lib/libc.a(clock.o)
+ .debug_frame   0x00000000000003c8       0x38 0x8 /usr/local/popcorn/x86_64/lib/libc.a(clock_gettime.o)
+ .debug_frame   0x0000000000000400       0xa8 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__init_tls.o)
+ .debug_frame   0x00000000000004a8       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__errno_location.o)
+ .debug_frame   0x00000000000004d8       0x48 0x8 /usr/local/popcorn/x86_64/lib/libc.a(strerror.o)
+ .debug_frame   0x0000000000000520       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(_Exit.o)
+ .debug_frame   0x0000000000000550       0x38 0x8 /usr/local/popcorn/x86_64/lib/libc.a(syscall_ret.o)
+ .debug_frame   0x0000000000000588       0x60 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__lctrans.o)
+ .debug_frame   0x00000000000005e8       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__fpclassifyl.o)
+ .debug_frame   0x0000000000000618       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__signbitl.o)
+ .debug_frame   0x0000000000000648       0x40 0x8 /usr/local/popcorn/x86_64/lib/libc.a(frexpl.o)
+ .debug_frame   0x0000000000000688       0x38 0x8 /usr/local/popcorn/x86_64/lib/libc.a(wctomb.o)
+ .debug_frame   0x00000000000006c0       0x70 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__lockfile.o)
+ .debug_frame   0x0000000000000730       0x50 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_close.o)
+ .debug_frame   0x0000000000000780       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_seek.o)
+ .debug_frame   0x00000000000007b0       0x70 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_write.o)
+ .debug_frame   0x0000000000000820       0xb0 0x8 /usr/local/popcorn/x86_64/lib/libc.a(fwrite.o)
+ .debug_frame   0x00000000000008d0       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(memchr.o)
+ .debug_frame   0x0000000000000900       0x40 0x8 /usr/local/popcorn/x86_64/lib/libc.a(memcpy.o)
+ .debug_frame   0x0000000000000940       0x40 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__wait.o)
+ .debug_frame   0x0000000000000980       0x30 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__set_thread_area.o)
+ .debug_frame   0x00000000000009b0       0x40 0x8 /usr/local/popcorn/x86_64/lib/libc.a(wcrtomb.o)
+ .debug_frame   0x00000000000009f0       0x48 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__towrite.o)
+ .debug_frame   0x0000000000000a38       0x60 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__stdio_exit.o)
+ .debug_frame   0x0000000000000a98       0x50 0x8 /usr/local/popcorn/x86_64/lib/libc.a(ofl.o)
+ .debug_frame   0x0000000000000ae8       0x60 0x8 /usr/local/popcorn/x86_64/lib/libc.a(__lock.o)
+
+.note.gnu.gold-version
+                0x0000000000000000       0x1c
+ ** note header
+                0x0000000000000000       0x10
+ ** fill        0x0000000000000010        0x9
+ ** zero fill   0x0000000000000019        0x3
+
+.symtab         0x0000000000000000     0x1368
+ ** symtab      0x0000000000000000     0x1368
+
+.strtab         0x0000000000000000      0xb47
+ ** string table
+                0x0000000000000000      0xb47
+
+.shstrtab       0x0000000000000000      0x193
+ ** string table
+                0x0000000000000000      0x193
