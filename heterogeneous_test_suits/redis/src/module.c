@@ -47,22 +47,8 @@ struct RedisModule {
     int ver;        /* Module version. We use just progressive integers. */
     int apiver;     /* Module API version as requested during initialization.*/
     list *types;    /* Module data types. */
-    list *usedby;   /* List of modules using APIs from this one. */
-    list *using;    /* List of modules we use some APIs of. */
-    list *filters;  /* List of filters the module has registered. */
-    int in_call;    /* RM_Call() nesting level */
 };
 typedef struct RedisModule RedisModule;
-
-/* This represents a shared API. Shared APIs will be used to populate
- * the server.sharedapi dictionary, mapping names of APIs exported by
- * modules for other modules to use, to their structure specifying the
- * function pointer that can be called. */
-struct RedisModuleSharedAPI {
-    void *func;
-    RedisModule *module;
-};
-typedef struct RedisModuleSharedAPI RedisModuleSharedAPI;
 
 static dict *modules; /* Hash table of modules. SDS -> RedisModule ptr.*/
 
@@ -271,25 +257,6 @@ typedef struct RedisModuleDictIter {
     RedisModuleDict *dict;
     raxIterator ri;
 } RedisModuleDictIter;
-
-typedef struct RedisModuleCommandFilterCtx {
-    RedisModuleString **argv;
-    int argc;
-} RedisModuleCommandFilterCtx;
-
-typedef void (*RedisModuleCommandFilterFunc) (RedisModuleCommandFilterCtx *filter);
-
-typedef struct RedisModuleCommandFilter {
-    /* The module that registered the filter */
-    RedisModule *module;
-    /* Filter callback function */
-    RedisModuleCommandFilterFunc callback;
-    /* REDISMODULE_CMDFILTER_* flags */
-    int flags;
-} RedisModuleCommandFilter;
-
-/* Registered filters */
-static list *moduleCommandFilters;
 
 /* --------------------------------------------------------------------------
  * Prototypes
@@ -542,22 +509,6 @@ void RedisModuleCommandDispatcher(client *c) {
     cp->func(&ctx,(void**)c->argv,c->argc);
     moduleHandlePropagationAfterCommandCallback(&ctx);
     moduleFreeContext(&ctx);
-
-    /* In some cases processMultibulkBuffer uses sdsMakeRoomFor to
-     * expand the query buffer, and in order to avoid a big object copy
-     * the query buffer SDS may be used directly as the SDS string backing
-     * the client argument vectors: sometimes this will result in the SDS
-     * string having unused space at the end. Later if a module takes ownership
-     * of the RedisString, such space will be wasted forever. Inside the
-     * Redis core this is not a problem because tryObjectEncoding() is called
-     * before storing strings in the key space. Here we need to do it
-     * for the module. */
-    for (int i = 0; i < c->argc; i++) {
-        /* Only do the work if the module took ownership of the object:
-         * in that case the refcount is no longer 1. */
-        if (c->argv[i]->refcount > 1)
-            trimStringObjectIfNeeded(c->argv[i]);
-    }
 }
 
 /* This function returns the list of keys, with the same interface as the
@@ -733,7 +684,6 @@ int RM_CreateCommand(RedisModuleCtx *ctx, const char *name, RedisModuleCmdFunc c
     cp->rediscmd->calls = 0;
     dictAdd(server.commands,sdsdup(cmdname),cp->rediscmd);
     dictAdd(server.orig_commands,sdsdup(cmdname),cp->rediscmd);
-    cp->rediscmd->id = ACLGetCommandID(cmdname); /* ID used for ACL. */
     return REDISMODULE_OK;
 }
 
@@ -750,10 +700,6 @@ void RM_SetModuleAttribs(RedisModuleCtx *ctx, const char *name, int ver, int api
     module->ver = ver;
     module->apiver = apiver;
     module->types = listCreate();
-    module->usedby = listCreate();
-    module->using = listCreate();
-    module->filters = listCreate();
-    module->in_call = 0;
     ctx->module = module;
 }
 
@@ -1177,10 +1123,10 @@ int RM_ReplyWithArray(RedisModuleCtx *ctx, long len) {
         ctx->postponed_arrays = zrealloc(ctx->postponed_arrays,sizeof(void*)*
                 (ctx->postponed_arrays_count+1));
         ctx->postponed_arrays[ctx->postponed_arrays_count] =
-            addReplyDeferredLen(c);
+            addDeferredMultiBulkLength(c);
         ctx->postponed_arrays_count++;
     } else {
-        addReplyArrayLen(c,len);
+        addReplyMultiBulkLen(c,len);
     }
     return REDISMODULE_OK;
 }
@@ -1223,7 +1169,7 @@ void RM_ReplySetArrayLength(RedisModuleCtx *ctx, long len) {
             return;
     }
     ctx->postponed_arrays_count--;
-    setDeferredArrayLen(c,
+    setDeferredMultiBulkLength(c,
             ctx->postponed_arrays[ctx->postponed_arrays_count],
             len);
     if (ctx->postponed_arrays_count == 0) {
@@ -1259,7 +1205,7 @@ int RM_ReplyWithString(RedisModuleCtx *ctx, RedisModuleString *str) {
 int RM_ReplyWithNull(RedisModuleCtx *ctx) {
     client *c = moduleGetReplyClient(ctx);
     if (c == NULL) return REDISMODULE_OK;
-    addReplyNull(c);
+    addReply(c,shared.nullbulk);
     return REDISMODULE_OK;
 }
 
@@ -1412,9 +1358,6 @@ int RM_GetSelectedDb(RedisModuleCtx *ctx) {
  *
  *  * REDISMODULE_CTX_FLAGS_MULTI: The command is running inside a transaction
  *
- *  * REDISMODULE_CTX_FLAGS_REPLICATED: The command was sent over the replication
- *    link by the MASTER
- *
  *  * REDISMODULE_CTX_FLAGS_MASTER: The Redis instance is a master
  *
  *  * REDISMODULE_CTX_FLAGS_SLAVE: The Redis instance is a slave
@@ -1447,9 +1390,6 @@ int RM_GetContextFlags(RedisModuleCtx *ctx) {
          flags |= REDISMODULE_CTX_FLAGS_LUA;
         if (ctx->client->flags & CLIENT_MULTI)
          flags |= REDISMODULE_CTX_FLAGS_MULTI;
-        /* Module command recieved from MASTER, is replicated. */
-        if (ctx->client->flags & CLIENT_MASTER)
-         flags |= REDISMODULE_CTX_FLAGS_REPLICATED;
     }
 
     if (server.cluster_enabled)
@@ -2747,10 +2687,15 @@ RedisModuleCallReply *RM_Call(RedisModuleCtx *ctx, const char *cmdname, const ch
     RedisModuleCallReply *reply = NULL;
     int replicate = 0; /* Replicate this command? */
 
+    cmd = lookupCommandByCString((char*)cmdname);
+    if (!cmd) {
+        errno = EINVAL;
+        return NULL;
+    }
+
     /* Create the client and dispatch the command. */
     va_start(ap, fmt);
     c = createClient(-1);
-    c->user = NULL; /* Root user. */
     argv = moduleCreateArgvFromUserFormat(cmdname,fmt,&argc,&flags,ap);
     replicate = flags & REDISMODULE_ARGV_REPLICATE;
     va_end(ap);
@@ -2760,24 +2705,10 @@ RedisModuleCallReply *RM_Call(RedisModuleCtx *ctx, const char *cmdname, const ch
     c->db = ctx->client->db;
     c->argv = argv;
     c->argc = argc;
-    if (ctx->module) ctx->module->in_call++;
-
+    c->cmd = c->lastcmd = cmd;
     /* We handle the above format error only when the client is setup so that
      * we can free it normally. */
     if (argv == NULL) goto cleanup;
-
-    /* Call command filters */
-    moduleCallCommandFilters(c);
-
-    /* Lookup command now, after filters had a chance to make modifications
-     * if necessary.
-     */
-    cmd = lookupCommand(c->argv[0]->ptr);
-    if (!cmd) {
-        errno = EINVAL;
-        goto cleanup;
-    }
-    c->cmd = c->lastcmd = cmd;
 
     /* Basic arity checks. */
     if ((cmd->arity > 0 && cmd->arity != argc) || (argc < -cmd->arity)) {
@@ -2828,7 +2759,6 @@ RedisModuleCallReply *RM_Call(RedisModuleCtx *ctx, const char *cmdname, const ch
     autoMemoryAdd(ctx,REDISMODULE_AM_REPLY,reply);
 
 cleanup:
-    if (ctx->module) ctx->module->in_call--;
     freeClient(c);
     return reply;
 }
@@ -3470,14 +3400,6 @@ RedisModuleCtx *RM_GetContextFromIO(RedisModuleIO *io) {
     return io->ctx;
 }
 
-/* Returns a RedisModuleString with the name of the key currently saving or
- * loading, when an IO data type callback is called.  There is no guarantee
- * that the key name is always available, so this may return NULL.
- */
-const RedisModuleString *RM_GetKeyNameFromIO(RedisModuleIO *io) {
-    return io->key;
-}
-
 /* --------------------------------------------------------------------------
  * Logging
  * -------------------------------------------------------------------------- */
@@ -3498,8 +3420,6 @@ void RM_LogRaw(RedisModule *module, const char *levelstr, const char *fmt, va_li
     else if (!strcasecmp(levelstr,"notice")) level = LL_NOTICE;
     else if (!strcasecmp(levelstr,"warning")) level = LL_WARNING;
     else level = LL_VERBOSE; /* Default. */
-
-    if (level < server.verbosity) return;
 
     name_len = snprintf(msg, sizeof(msg),"<%s> ", module->name);
     vsnprintf(msg + name_len, sizeof(msg) - name_len, fmt, ap);
@@ -3747,7 +3667,14 @@ void moduleHandleBlockedClients(void) {
          * replies to send to the client in a thread safe context.
          * We need to glue such replies to the client output buffer and
          * free the temporary client we just used for the replies. */
-        if (c) AddReplyFromClient(c, bc->reply_client);
+        if (c) {
+            if (bc->reply_client->bufpos)
+                addReplyString(c,bc->reply_client->buf,
+                                 bc->reply_client->bufpos);
+            if (listLength(bc->reply_client->reply))
+                listJoin(c->reply,bc->reply_client->reply);
+            c->reply_bytes += bc->reply_client->reply_bytes;
+        }
         freeClient(bc->reply_client);
 
         if (c != NULL) {
@@ -3866,10 +3793,7 @@ RedisModuleCtx *RM_GetThreadSafeContext(RedisModuleBlockedClient *bc) {
      * in order to keep things like the currently selected database and similar
      * things. */
     ctx->client = createClient(-1);
-    if (bc) {
-        selectDb(ctx->client,bc->dbid);
-        ctx->client->id = bc->client->id;
-    }
+    if (bc) selectDb(ctx->client,bc->dbid);
     return ctx;
 }
 
@@ -4692,329 +4616,6 @@ void RM_GetRandomHexChars(char *dst, size_t len) {
 }
 
 /* --------------------------------------------------------------------------
- * Modules API exporting / importing
- * -------------------------------------------------------------------------- */
-
-/* This function is called by a module in order to export some API with a
- * given name. Other modules will be able to use this API by calling the
- * symmetrical function RM_GetSharedAPI() and casting the return value to
- * the right function pointer.
- *
- * The function will return REDISMODULE_OK if the name is not already taken,
- * otherwise REDISMODULE_ERR will be returned and no operation will be
- * performed.
- *
- * IMPORTANT: the apiname argument should be a string literal with static
- * lifetime. The API relies on the fact that it will always be valid in
- * the future. */
-int RM_ExportSharedAPI(RedisModuleCtx *ctx, const char *apiname, void *func) {
-    RedisModuleSharedAPI *sapi = zmalloc(sizeof(*sapi));
-    sapi->module = ctx->module;
-    sapi->func = func;
-    if (dictAdd(server.sharedapi, (char*)apiname, sapi) != DICT_OK) {
-        zfree(sapi);
-        return REDISMODULE_ERR;
-    }
-    return REDISMODULE_OK;
-}
-
-/* Request an exported API pointer. The return value is just a void pointer
- * that the caller of this function will be required to cast to the right
- * function pointer, so this is a private contract between modules.
- *
- * If the requested API is not available then NULL is returned. Because
- * modules can be loaded at different times with different order, this
- * function calls should be put inside some module generic API registering
- * step, that is called every time a module attempts to execute a
- * command that requires external APIs: if some API cannot be resolved, the
- * command should return an error.
- *
- * Here is an exmaple:
- *
- *     int ... myCommandImplementation() {
- *        if (getExternalAPIs() == 0) {
- *             reply with an error here if we cannot have the APIs
- *        }
- *        // Use the API:
- *        myFunctionPointer(foo);
- *     }
- *
- * And the function registerAPI() is:
- *
- *     int getExternalAPIs(void) {
- *         static int api_loaded = 0;
- *         if (api_loaded != 0) return 1; // APIs already resolved.
- *
- *         myFunctionPointer = RedisModule_GetOtherModuleAPI("...");
- *         if (myFunctionPointer == NULL) return 0;
- *
- *         return 1;
- *     }
- */
-void *RM_GetSharedAPI(RedisModuleCtx *ctx, const char *apiname) {
-    dictEntry *de = dictFind(server.sharedapi, apiname);
-    if (de == NULL) return NULL;
-    RedisModuleSharedAPI *sapi = dictGetVal(de);
-    if (listSearchKey(sapi->module->usedby,ctx->module) == NULL) {
-        listAddNodeTail(sapi->module->usedby,ctx->module);
-        listAddNodeTail(ctx->module->using,sapi->module);
-    }
-    return sapi->func;
-}
-
-/* Remove all the APIs registered by the specified module. Usually you
- * want this when the module is going to be unloaded. This function
- * assumes that's caller responsibility to make sure the APIs are not
- * used by other modules.
- *
- * The number of unregistered APIs is returned. */
-int moduleUnregisterSharedAPI(RedisModule *module) {
-    int count = 0;
-    dictIterator *di = dictGetSafeIterator(server.sharedapi);
-    dictEntry *de;
-    while ((de = dictNext(di)) != NULL) {
-        const char *apiname = dictGetKey(de);
-        RedisModuleSharedAPI *sapi = dictGetVal(de);
-        if (sapi->module == module) {
-            dictDelete(server.sharedapi,apiname);
-            zfree(sapi);
-            count++;
-        }
-    }
-    dictReleaseIterator(di);
-    return count;
-}
-
-/* Remove the specified module as an user of APIs of ever other module.
- * This is usually called when a module is unloaded.
- *
- * Returns the number of modules this module was using APIs from. */
-int moduleUnregisterUsedAPI(RedisModule *module) {
-    listIter li;
-    listNode *ln;
-    int count = 0;
-
-    listRewind(module->using,&li);
-    while((ln = listNext(&li))) {
-        RedisModule *used = ln->value;
-        listNode *ln = listSearchKey(used->usedby,module);
-        if (ln) {
-            listDelNode(module->using,ln);
-            count++;
-        }
-    }
-    return count;
-}
-
-/* Unregister all filters registered by a module.
- * This is called when a module is being unloaded.
- * 
- * Returns the number of filters unregistered. */
-int moduleUnregisterFilters(RedisModule *module) {
-    listIter li;
-    listNode *ln;
-    int count = 0;
-
-    listRewind(module->filters,&li);
-    while((ln = listNext(&li))) {
-        RedisModuleCommandFilter *filter = ln->value;
-        listNode *ln = listSearchKey(moduleCommandFilters,filter);
-        if (ln) {
-            listDelNode(moduleCommandFilters,ln);
-            count++;
-        }
-        zfree(filter);
-    }
-    return count;
-}
-
-/* --------------------------------------------------------------------------
- * Module Command Filter API
- * -------------------------------------------------------------------------- */
-
-/* Register a new command filter function.
- *
- * Command filtering makes it possible for modules to extend Redis by plugging
- * into the execution flow of all commands.
- *
- * A registered filter gets called before Redis executes *any* command.  This
- * includes both core Redis commands and commands registered by any module.  The
- * filter applies in all execution paths including:
- *
- * 1. Invocation by a client.
- * 2. Invocation through `RedisModule_Call()` by any module.
- * 3. Invocation through Lua 'redis.call()`.
- * 4. Replication of a command from a master.
- *
- * The filter executes in a special filter context, which is different and more
- * limited than a RedisModuleCtx.  Because the filter affects any command, it
- * must be implemented in a very efficient way to reduce the performance impact
- * on Redis.  All Redis Module API calls that require a valid context (such as
- * `RedisModule_Call()`, `RedisModule_OpenKey()`, etc.) are not supported in a
- * filter context.
- *
- * The `RedisModuleCommandFilterCtx` can be used to inspect or modify the
- * executed command and its arguments.  As the filter executes before Redis
- * begins processing the command, any change will affect the way the command is
- * processed.  For example, a module can override Redis commands this way:
- *
- * 1. Register a `MODULE.SET` command which implements an extended version of
- *    the Redis `SET` command.
- * 2. Register a command filter which detects invocation of `SET` on a specific
- *    pattern of keys.  Once detected, the filter will replace the first
- *    argument from `SET` to `MODULE.SET`.
- * 3. When filter execution is complete, Redis considers the new command name
- *    and therefore executes the module's own command.
- *
- * Note that in the above use case, if `MODULE.SET` itself uses
- * `RedisModule_Call()` the filter will be applied on that call as well.  If
- * that is not desired, the `REDISMODULE_CMDFILTER_NOSELF` flag can be set when
- * registering the filter.
- *
- * The `REDISMODULE_CMDFILTER_NOSELF` flag prevents execution flows that
- * originate from the module's own `RM_Call()` from reaching the filter.  This
- * flag is effective for all execution flows, including nested ones, as long as
- * the execution begins from the module's command context or a thread-safe
- * context that is associated with a blocking command.
- *
- * Detached thread-safe contexts are *not* associated with the module and cannot
- * be protected by this flag.
- *
- * If multiple filters are registered (by the same or different modules), they
- * are executed in the order of registration.
- */
-
-RedisModuleCommandFilter *RM_RegisterCommandFilter(RedisModuleCtx *ctx, RedisModuleCommandFilterFunc callback, int flags) {
-    RedisModuleCommandFilter *filter = zmalloc(sizeof(*filter));
-    filter->module = ctx->module;
-    filter->callback = callback;
-    filter->flags = flags;
-
-    listAddNodeTail(moduleCommandFilters, filter);
-    listAddNodeTail(ctx->module->filters, filter);
-    return filter;
-}
-
-/* Unregister a command filter.
- */
-int RM_UnregisterCommandFilter(RedisModuleCtx *ctx, RedisModuleCommandFilter *filter) {
-    listNode *ln;
-
-    /* A module can only remove its own filters */
-    if (filter->module != ctx->module) return REDISMODULE_ERR;
-
-    ln = listSearchKey(moduleCommandFilters,filter);
-    if (!ln) return REDISMODULE_ERR;
-    listDelNode(moduleCommandFilters,ln);
-    
-    ln = listSearchKey(ctx->module->filters,filter);
-    if (!ln) return REDISMODULE_ERR;    /* Shouldn't happen */
-    listDelNode(ctx->module->filters,ln);
-
-    return REDISMODULE_OK;
-}
-
-void moduleCallCommandFilters(client *c) {
-    if (listLength(moduleCommandFilters) == 0) return;
-
-    listIter li;
-    listNode *ln;
-    listRewind(moduleCommandFilters,&li);
-
-    RedisModuleCommandFilterCtx filter = {
-        .argv = c->argv,
-        .argc = c->argc
-    };
-
-    while((ln = listNext(&li))) {
-        RedisModuleCommandFilter *f = ln->value;
-
-        /* Skip filter if REDISMODULE_CMDFILTER_NOSELF is set and module is
-         * currently processing a command.
-         */
-        if ((f->flags & REDISMODULE_CMDFILTER_NOSELF) && f->module->in_call) continue;
-
-        /* Call filter */
-        f->callback(&filter);
-    }
-
-    c->argv = filter.argv;
-    c->argc = filter.argc;
-}
-
-/* Return the number of arguments a filtered command has.  The number of
- * arguments include the command itself.
- */
-int RM_CommandFilterArgsCount(RedisModuleCommandFilterCtx *fctx)
-{
-    return fctx->argc;
-}
-
-/* Return the specified command argument.  The first argument (position 0) is
- * the command itself, and the rest are user-provided args.
- */
-const RedisModuleString *RM_CommandFilterArgGet(RedisModuleCommandFilterCtx *fctx, int pos)
-{
-    if (pos < 0 || pos >= fctx->argc) return NULL;
-    return fctx->argv[pos];
-}
-
-/* Modify the filtered command by inserting a new argument at the specified
- * position.  The specified RedisModuleString argument may be used by Redis
- * after the filter context is destroyed, so it must not be auto-memory
- * allocated, freed or used elsewhere.
- */
-
-int RM_CommandFilterArgInsert(RedisModuleCommandFilterCtx *fctx, int pos, RedisModuleString *arg)
-{
-    int i;
-
-    if (pos < 0 || pos > fctx->argc) return REDISMODULE_ERR;
-
-    fctx->argv = zrealloc(fctx->argv, (fctx->argc+1)*sizeof(RedisModuleString *));
-    for (i = fctx->argc; i > pos; i--) {
-        fctx->argv[i] = fctx->argv[i-1];
-    }
-    fctx->argv[pos] = arg;
-    fctx->argc++;
-
-    return REDISMODULE_OK;
-}
-
-/* Modify the filtered command by replacing an existing argument with a new one.
- * The specified RedisModuleString argument may be used by Redis after the
- * filter context is destroyed, so it must not be auto-memory allocated, freed
- * or used elsewhere.
- */
-
-int RM_CommandFilterArgReplace(RedisModuleCommandFilterCtx *fctx, int pos, RedisModuleString *arg)
-{
-    if (pos < 0 || pos >= fctx->argc) return REDISMODULE_ERR;
-
-    decrRefCount(fctx->argv[pos]);
-    fctx->argv[pos] = arg;
-
-    return REDISMODULE_OK;
-}
-
-/* Modify the filtered command by deleting an argument at the specified
- * position.
- */
-int RM_CommandFilterArgDelete(RedisModuleCommandFilterCtx *fctx, int pos)
-{
-    int i;
-    if (pos < 0 || pos >= fctx->argc) return REDISMODULE_ERR;
-
-    decrRefCount(fctx->argv[pos]);
-    for (i = pos; i < fctx->argc-1; i++) {
-        fctx->argv[i] = fctx->argv[i+1];
-    }
-    fctx->argc--;
-
-    return REDISMODULE_OK;
-}
-
-/* --------------------------------------------------------------------------
  * Modules API internals
  * -------------------------------------------------------------------------- */
 
@@ -5058,10 +4659,6 @@ void moduleInitModulesSystem(void) {
     moduleKeyspaceSubscribers = listCreate();
     moduleFreeContextReusedClient = createClient(-1);
     moduleFreeContextReusedClient->flags |= CLIENT_MODULE;
-    moduleFreeContextReusedClient->user = NULL; /* root user. */
-
-    /* Set up filter list */
-    moduleCommandFilters = listCreate();
 
     moduleRegisterCoreAPI();
     if (pipe(server.module_blocked_pipe) == -1) {
@@ -5112,7 +4709,6 @@ void moduleLoadFromQueue(void) {
 
 void moduleFreeModuleStructure(struct RedisModule *module) {
     listRelease(module->types);
-    listRelease(module->filters);
     sdsfree(module->name);
     zfree(module);
 }
@@ -5162,8 +4758,6 @@ int moduleLoad(const char *path, void **module_argv, int module_argc) {
     if (onload((void*)&ctx,module_argv,module_argc) == REDISMODULE_ERR) {
         if (ctx.module) {
             moduleUnregisterCommands(ctx.module);
-            moduleUnregisterSharedAPI(ctx.module);
-            moduleUnregisterUsedAPI(ctx.module);
             moduleFreeModuleStructure(ctx.module);
         }
         dlclose(handle);
@@ -5193,18 +4787,14 @@ int moduleUnload(sds name) {
     if (module == NULL) {
         errno = ENOENT;
         return REDISMODULE_ERR;
-    } else if (listLength(module->types)) {
+    }
+
+    if (listLength(module->types)) {
         errno = EBUSY;
-        return REDISMODULE_ERR;
-    } else if (listLength(module->usedby)) {
-        errno = EPERM;
         return REDISMODULE_ERR;
     }
 
     moduleUnregisterCommands(module);
-    moduleUnregisterSharedAPI(module);
-    moduleUnregisterUsedAPI(module);
-    moduleUnregisterFilters(module);
 
     /* Remove any notification subscribers this module might have */
     moduleUnsubscribeNotifications(module);
@@ -5226,25 +4816,6 @@ int moduleUnload(sds name) {
     moduleFreeModuleStructure(module);
 
     return REDISMODULE_OK;
-}
-
-/* Helper function for the MODULE and HELLO command: send the list of the
- * loaded modules to the client. */
-void addReplyLoadedModules(client *c) {
-    dictIterator *di = dictGetIterator(modules);
-    dictEntry *de;
-
-    addReplyArrayLen(c,dictSize(modules));
-    while ((de = dictNext(di)) != NULL) {
-        sds name = dictGetKey(de);
-        struct RedisModule *module = dictGetVal(de);
-        addReplyMapLen(c,2);
-        addReplyBulkCString(c,"name");
-        addReplyBulkCBuffer(c,name,sdslen(name));
-        addReplyBulkCString(c,"ver");
-        addReplyLongLong(c,module->ver);
-    }
-    dictReleaseIterator(di);
 }
 
 /* Redis MODULE command.
@@ -5285,12 +4856,7 @@ NULL
                 errmsg = "no such module with that name";
                 break;
             case EBUSY:
-                errmsg = "the module exports one or more module-side data "
-                         "types, can't unload";
-                break;
-            case EPERM:
-                errmsg = "the module exports APIs used by other modules. "
-                         "Please unload them first and try again";
+                errmsg = "the module exports one or more module-side data types, can't unload";
                 break;
             default:
                 errmsg = "operation not possible.";
@@ -5299,7 +4865,20 @@ NULL
             addReplyErrorFormat(c,"Error unloading module: %s",errmsg);
         }
     } else if (!strcasecmp(subcmd,"list") && c->argc == 2) {
-        addReplyLoadedModules(c);
+        dictIterator *di = dictGetIterator(modules);
+        dictEntry *de;
+
+        addReplyMultiBulkLen(c,dictSize(modules));
+        while ((de = dictNext(di)) != NULL) {
+            sds name = dictGetKey(de);
+            struct RedisModule *module = dictGetVal(de);
+            addReplyMultiBulkLen(c,4);
+            addReplyBulkCString(c,"name");
+            addReplyBulkCBuffer(c,name,sdslen(name));
+            addReplyBulkCString(c,"ver");
+            addReplyLongLong(c,module->ver);
+        }
+        dictReleaseIterator(di);
     } else {
         addReplySubcommandSyntaxError(c);
         return;
@@ -5315,7 +4894,6 @@ size_t moduleCount(void) {
  * file so that's easy to seek it to add new entries. */
 void moduleRegisterCoreAPI(void) {
     server.moduleapi = dictCreate(&moduleAPIDictType,NULL);
-    server.sharedapi = dictCreate(&moduleAPIDictType,NULL);
     REGISTER_API(Alloc);
     REGISTER_API(Calloc);
     REGISTER_API(Realloc);
@@ -5413,7 +4991,6 @@ void moduleRegisterCoreAPI(void) {
     REGISTER_API(RetainString);
     REGISTER_API(StringCompare);
     REGISTER_API(GetContextFromIO);
-    REGISTER_API(GetKeyNameFromIO);
     REGISTER_API(BlockClient);
     REGISTER_API(UnblockClient);
     REGISTER_API(IsBlockedReplyRequest);
@@ -5467,13 +5044,4 @@ void moduleRegisterCoreAPI(void) {
     REGISTER_API(DictPrev);
     REGISTER_API(DictCompareC);
     REGISTER_API(DictCompare);
-    REGISTER_API(ExportSharedAPI);
-    REGISTER_API(GetSharedAPI);
-    REGISTER_API(RegisterCommandFilter);
-    REGISTER_API(UnregisterCommandFilter);
-    REGISTER_API(CommandFilterArgsCount);
-    REGISTER_API(CommandFilterArgGet);
-    REGISTER_API(CommandFilterArgInsert);
-    REGISTER_API(CommandFilterArgReplace);
-    REGISTER_API(CommandFilterArgDelete);
 }

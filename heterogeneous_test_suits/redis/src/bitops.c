@@ -994,21 +994,15 @@ void bitfieldCommand(client *c) {
         /* Lookup for read is ok if key doesn't exit, but errors
          * if it's not a string. */
         o = lookupKeyRead(c->db,c->argv[1]);
-        if (o != NULL && checkType(c,o,OBJ_STRING)) {
-            zfree(ops);
-            return;
-        }
+        if (o != NULL && checkType(c,o,OBJ_STRING)) return;
     } else {
         /* Lookup by making room up to the farest bit reached by
          * this operation. */
         if ((o = lookupStringForBitCommand(c,
-            highest_write_offset)) == NULL) {
-            zfree(ops);
-            return;
-        }
+            highest_write_offset)) == NULL) return;
     }
 
-    addReplyArrayLen(c,numops);
+    addReplyMultiBulkLen(c,numops);
 
     /* Actually process the operations. */
     for (j = 0; j < numops; j++) {
@@ -1053,7 +1047,7 @@ void bitfieldCommand(client *c) {
                     setSignedBitfield(o->ptr,thisop->offset,
                                       thisop->bits,newval);
                 } else {
-                    addReplyNull(c);
+                    addReply(c,shared.nullbulk);
                 }
             } else {
                 uint64_t oldval, newval, wrapped, retval;
@@ -1082,7 +1076,7 @@ void bitfieldCommand(client *c) {
                     setUnsignedBitfield(o->ptr,thisop->offset,
                                         thisop->bits,newval);
                 } else {
-                    addReplyNull(c);
+                    addReply(c,shared.nullbulk);
                 }
             }
             changes++;

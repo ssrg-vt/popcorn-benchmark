@@ -257,11 +257,7 @@ sds sdsRemoveFreeSpace(sds s) {
     char type, oldtype = s[-1] & SDS_TYPE_MASK;
     int hdrlen, oldhdrlen = sdsHdrSize(oldtype);
     size_t len = sdslen(s);
-    size_t avail = sdsavail(s);
     sh = (char*)s-oldhdrlen;
-
-    /* Return ASAP if there is no space left. */
-    if (avail == 0) return s;
 
     /* Check what would be the minimum SDS header that is just good enough to
      * fit this string. */
@@ -289,7 +285,6 @@ sds sdsRemoveFreeSpace(sds s) {
     return s;
 }
 
-volatile int __redis_hold = 1;
 /* Return the total size of the allocation of the specified sds string,
  * including:
  * 1) The sds header before the pointer.
@@ -299,7 +294,6 @@ volatile int __redis_hold = 1;
  */
 size_t sdsAllocSize(sds s) {
     size_t alloc = sdsalloc(s);
-    //while (__redis_hold);
     return sdsHdrSize(s[-1])+alloc+1;
 }
 

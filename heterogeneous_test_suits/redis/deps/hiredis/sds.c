@@ -219,10 +219,7 @@ sds sdsMakeRoomFor(sds s, size_t addlen) {
     hdrlen = sdsHdrSize(type);
     if (oldtype==type) {
         newsh = s_realloc(sh, hdrlen+newlen+1);
-        if (newsh == NULL) {
-            s_free(sh);
-            return NULL;
-        }
+        if (newsh == NULL) return NULL;
         s = (char*)newsh+hdrlen;
     } else {
         /* Since the header size changes, need to move the string forward,
@@ -500,180 +497,172 @@ sds sdsfromlonglong(long long value) {
     return sdsnewlen(buf,len);
 }
 
-///* Like sdscatprintf() but gets va_list instead of being variadic. */
-//sds sdscatvprintf(sds s, const char *fmt, va_list ap) {
-//    va_list cpy;
-//    char staticbuf[1024], *buf = staticbuf, *t;
-//    size_t buflen = strlen(fmt)*2;
-//
-//    /* We try to start using a static buffer for speed.
-//     * If not possible we revert to heap allocation. */
-//    if (buflen > sizeof(staticbuf)) {
-//        buf = s_malloc(buflen);
-//        if (buf == NULL) return NULL;
-//    } else {
-//        buflen = sizeof(staticbuf);
-//    }
-//
-//    /* Try with buffers two times bigger every time we fail to
-//     * fit the string in the current buffer size. */
-//    while(1) {
-//        buf[buflen-2] = '\0';
-//        va_copy(cpy,ap);
-//        vsnprintf(buf, buflen, fmt, cpy);
-//        va_end(cpy);
-//        if (buf[buflen-2] != '\0') {
-//            if (buf != staticbuf) s_free(buf);
-//            buflen *= 2;
-//            buf = s_malloc(buflen);
-//            if (buf == NULL) return NULL;
-//            continue;
-//        }
-//        break;
-//    }
-//
-//    /* Finally concat the obtained string to the SDS string and return it. */
-//    t = sdscat(s, buf);
-//    if (buf != staticbuf) s_free(buf);
-//    return t;
-//}
-//
-///* Append to the sds string 's' a string obtained using printf-alike format
-// * specifier.
-// *
-// * After the call, the modified sds string is no longer valid and all the
-// * references must be substituted with the new pointer returned by the call.
-// *
-// * Example:
-// *
-// * s = sdsnew("Sum is: ");
-// * s = sdscatprintf(s,"%d+%d = %d",a,b,a+b).
-// *
-// * Often you need to create a string from scratch with the printf-alike
-// * format. When this is the need, just use sdsempty() as the target string:
-// *
-// * s = sdscatprintf(sdsempty(), "... your format ...", args);
-// */
-//sds sdscatprintf(sds s, const char *fmt, ...) {
-//    va_list ap;
-//    char *t;
-//    va_start(ap, fmt);
-//    t = sdscatvprintf(s,fmt,ap);
-//    va_end(ap);
-//    return t;
-//}
-//
-///* This function is similar to sdscatprintf, but much faster as it does
-// * not rely on sprintf() family functions implemented by the libc that
-// * are often very slow. Moreover directly handling the sds string as
-// * new data is concatenated provides a performance improvement.
-// *
-// * However this function only handles an incompatible subset of printf-alike
-// * format specifiers:
-// *
-// * %s - C String
-// * %S - SDS string
-// * %i - signed int
-// * %I - 64 bit signed integer (long long, int64_t)
-// * %u - unsigned int
-// * %U - 64 bit unsigned integer (unsigned long long, uint64_t)
-// * %% - Verbatim "%" character.
-// */
-//sds sdscatfmt(sds s, char const *fmt, ...) {
-//    const char *f = fmt;
-//    int i;
-//    va_list ap;
-//
-//    va_start(ap,fmt);
-//    i = sdslen(s); /* Position of the next byte to write to dest str. */
-//    while(*f) {
-//        char next, *str;
-//        size_t l;
-//        long long num;
-//        unsigned long long unum;
-//
-//        /* Make sure there is always space for at least 1 char. */
-//        if (sdsavail(s)==0) {
-//            s = sdsMakeRoomFor(s,1);
-//            if (s == NULL) goto fmt_error;
-//        }
-//
-//        switch(*f) {
-//        case '%':
-//            next = *(f+1);
-//            f++;
-//            switch(next) {
-//            case 's':
-//            case 'S':
-//                str = va_arg(ap,char*);
-//                l = (next == 's') ? strlen(str) : sdslen(str);
-//                if (sdsavail(s) < l) {
-//                    s = sdsMakeRoomFor(s,l);
-//                    if (s == NULL) goto fmt_error;
-//                }
-//                memcpy(s+i,str,l);
-//                sdsinclen(s,l);
-//                i += l;
-//                break;
-//            case 'i':
-//            case 'I':
-//                if (next == 'i')
-//                    num = va_arg(ap,int);
-//                else
-//                    num = va_arg(ap,long long);
-//                {
-//                    char buf[SDS_LLSTR_SIZE];
-//                    l = sdsll2str(buf,num);
-//                    if (sdsavail(s) < l) {
-//                        s = sdsMakeRoomFor(s,l);
-//                        if (s == NULL) goto fmt_error;
-//                    }
-//                    memcpy(s+i,buf,l);
-//                    sdsinclen(s,l);
-//                    i += l;
-//                }
-//                break;
-//            case 'u':
-//            case 'U':
-//                if (next == 'u')
-//                    unum = va_arg(ap,unsigned int);
-//                else
-//                    unum = va_arg(ap,unsigned long long);
-//                {
-//                    char buf[SDS_LLSTR_SIZE];
-//                    l = sdsull2str(buf,unum);
-//                    if (sdsavail(s) < l) {
-//                        s = sdsMakeRoomFor(s,l);
-//                        if (s == NULL) goto fmt_error;
-//                    }
-//                    memcpy(s+i,buf,l);
-//                    sdsinclen(s,l);
-//                    i += l;
-//                }
-//                break;
-//            default: /* Handle %% and generally %<unknown>. */
-//                s[i++] = next;
-//                sdsinclen(s,1);
-//                break;
-//            }
-//            break;
-//        default:
-//            s[i++] = *f;
-//            sdsinclen(s,1);
-//            break;
-//        }
-//        f++;
-//    }
-//    va_end(ap);
-//
-//    /* Add null-term */
-//    s[i] = '\0';
-//    return s;
-//
-//fmt_error:
-//    va_end(ap);
-//    return NULL;
-//}
+/* Like sdscatprintf() but gets va_list instead of being variadic. */
+sds sdscatvprintf(sds s, const char *fmt, va_list ap) {
+    va_list cpy;
+    char staticbuf[1024], *buf = staticbuf, *t;
+    size_t buflen = strlen(fmt)*2;
+
+    /* We try to start using a static buffer for speed.
+     * If not possible we revert to heap allocation. */
+    if (buflen > sizeof(staticbuf)) {
+        buf = s_malloc(buflen);
+        if (buf == NULL) return NULL;
+    } else {
+        buflen = sizeof(staticbuf);
+    }
+
+    /* Try with buffers two times bigger every time we fail to
+     * fit the string in the current buffer size. */
+    while(1) {
+        buf[buflen-2] = '\0';
+        va_copy(cpy,ap);
+        vsnprintf(buf, buflen, fmt, cpy);
+        va_end(cpy);
+        if (buf[buflen-2] != '\0') {
+            if (buf != staticbuf) s_free(buf);
+            buflen *= 2;
+            buf = s_malloc(buflen);
+            if (buf == NULL) return NULL;
+            continue;
+        }
+        break;
+    }
+
+    /* Finally concat the obtained string to the SDS string and return it. */
+    t = sdscat(s, buf);
+    if (buf != staticbuf) s_free(buf);
+    return t;
+}
+
+/* Append to the sds string 's' a string obtained using printf-alike format
+ * specifier.
+ *
+ * After the call, the modified sds string is no longer valid and all the
+ * references must be substituted with the new pointer returned by the call.
+ *
+ * Example:
+ *
+ * s = sdsnew("Sum is: ");
+ * s = sdscatprintf(s,"%d+%d = %d",a,b,a+b).
+ *
+ * Often you need to create a string from scratch with the printf-alike
+ * format. When this is the need, just use sdsempty() as the target string:
+ *
+ * s = sdscatprintf(sdsempty(), "... your format ...", args);
+ */
+sds sdscatprintf(sds s, const char *fmt, ...) {
+    va_list ap;
+    char *t;
+    va_start(ap, fmt);
+    t = sdscatvprintf(s,fmt,ap);
+    va_end(ap);
+    return t;
+}
+
+/* This function is similar to sdscatprintf, but much faster as it does
+ * not rely on sprintf() family functions implemented by the libc that
+ * are often very slow. Moreover directly handling the sds string as
+ * new data is concatenated provides a performance improvement.
+ *
+ * However this function only handles an incompatible subset of printf-alike
+ * format specifiers:
+ *
+ * %s - C String
+ * %S - SDS string
+ * %i - signed int
+ * %I - 64 bit signed integer (long long, int64_t)
+ * %u - unsigned int
+ * %U - 64 bit unsigned integer (unsigned long long, uint64_t)
+ * %% - Verbatim "%" character.
+ */
+sds sdscatfmt(sds s, char const *fmt, ...) {
+    const char *f = fmt;
+    int i;
+    va_list ap;
+
+    va_start(ap,fmt);
+    i = sdslen(s); /* Position of the next byte to write to dest str. */
+    while(*f) {
+        char next, *str;
+        size_t l;
+        long long num;
+        unsigned long long unum;
+
+        /* Make sure there is always space for at least 1 char. */
+        if (sdsavail(s)==0) {
+            s = sdsMakeRoomFor(s,1);
+        }
+
+        switch(*f) {
+        case '%':
+            next = *(f+1);
+            f++;
+            switch(next) {
+            case 's':
+            case 'S':
+                str = va_arg(ap,char*);
+                l = (next == 's') ? strlen(str) : sdslen(str);
+                if (sdsavail(s) < l) {
+                    s = sdsMakeRoomFor(s,l);
+                }
+                memcpy(s+i,str,l);
+                sdsinclen(s,l);
+                i += l;
+                break;
+            case 'i':
+            case 'I':
+                if (next == 'i')
+                    num = va_arg(ap,int);
+                else
+                    num = va_arg(ap,long long);
+                {
+                    char buf[SDS_LLSTR_SIZE];
+                    l = sdsll2str(buf,num);
+                    if (sdsavail(s) < l) {
+                        s = sdsMakeRoomFor(s,l);
+                    }
+                    memcpy(s+i,buf,l);
+                    sdsinclen(s,l);
+                    i += l;
+                }
+                break;
+            case 'u':
+            case 'U':
+                if (next == 'u')
+                    unum = va_arg(ap,unsigned int);
+                else
+                    unum = va_arg(ap,unsigned long long);
+                {
+                    char buf[SDS_LLSTR_SIZE];
+                    l = sdsull2str(buf,unum);
+                    if (sdsavail(s) < l) {
+                        s = sdsMakeRoomFor(s,l);
+                    }
+                    memcpy(s+i,buf,l);
+                    sdsinclen(s,l);
+                    i += l;
+                }
+                break;
+            default: /* Handle %% and generally %<unknown>. */
+                s[i++] = next;
+                sdsinclen(s,1);
+                break;
+            }
+            break;
+        default:
+            s[i++] = *f;
+            sdsinclen(s,1);
+            break;
+        }
+        f++;
+    }
+    va_end(ap);
+
+    /* Add null-term */
+    s[i] = '\0';
+    return s;
+}
 
 /* Remove the part of the string from left and from right composed just of
  * contiguous characters found in 'cset', that is a null terminted C string.
@@ -1029,18 +1018,10 @@ sds *sdssplitargs(const char *line, int *argc) {
                 if (*p) p++;
             }
             /* add the token to the vector */
-            {
-                char **new_vector = s_realloc(vector,((*argc)+1)*sizeof(char*));
-                if (new_vector == NULL) {
-                    s_free(vector);
-                    return NULL;
-                }
-                
-                vector = new_vector;
-                vector[*argc] = current;
-                (*argc)++;
-                current = NULL;
-            }
+            vector = s_realloc(vector,((*argc)+1)*sizeof(char*));
+            vector[*argc] = current;
+            (*argc)++;
+            current = NULL;
         } else {
             /* Even on empty input string return something not NULL. */
             if (vector == NULL) vector = s_malloc(sizeof(void*));

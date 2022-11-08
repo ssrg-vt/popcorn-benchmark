@@ -1,6 +1,8 @@
 STD=
 WARN= -Wall
-OPT= -Os
+OPT= -Os -fno-common -ftls-model=initial-exec -ffunction-sections -fdata-sections
+CC:=/usr/local/popcorn/bin/popcorn-clang-no-mig
+CC=/usr/local/popcorn/bin/popcorn-clang-no-mig
 
 R_CFLAGS= $(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS)
 R_LDFLAGS= $(LDFLAGS)

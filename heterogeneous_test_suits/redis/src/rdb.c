@@ -751,7 +751,7 @@ size_t rdbSaveStreamConsumers(rio *rdb, streamCG *cg) {
 
 /* Save a Redis object.
  * Returns -1 on error, number of bytes written on success. */
-ssize_t rdbSaveObject(rio *rdb, robj *o, robj *key) {
+ssize_t rdbSaveObject(rio *rdb, robj *o) {
     ssize_t n = 0, nwritten = 0;
 
     if (o->type == OBJ_STRING) {
@@ -966,7 +966,7 @@ ssize_t rdbSaveObject(rio *rdb, robj *o, robj *key) {
         RedisModuleIO io;
         moduleValue *mv = o->ptr;
         moduleType *mt = mv->type;
-        moduleInitIOContext(io,mt,rdb,key);
+        moduleInitIOContext(io,mt,rdb);
 
         /* Write the "module" identifier as prefix, so that we'll be able
          * to call the right module during loading. */
@@ -996,7 +996,7 @@ ssize_t rdbSaveObject(rio *rdb, robj *o, robj *key) {
  * this length with very little changes to the code. In the future
  * we could switch to a faster solution. */
 size_t rdbSavedObjectLen(robj *o) {
-    ssize_t len = rdbSaveObject(NULL,o,NULL);
+    ssize_t len = rdbSaveObject(NULL,o);
     serverAssertWithInfo(NULL,o,len != -1);
     return len;
 }
@@ -1038,7 +1038,7 @@ int rdbSaveKeyValuePair(rio *rdb, robj *key, robj *val, long long expiretime) {
     /* Save type, key, value */
     if (rdbSaveObjectType(rdb,val) == -1) return -1;
     if (rdbSaveStringObject(rdb,key) == -1) return -1;
-    if (rdbSaveObject(rdb,val,key) == -1) return -1;
+    if (rdbSaveObject(rdb,val) == -1) return -1;
     return 1;
 }
 
@@ -1380,7 +1380,7 @@ robj *rdbLoadCheckModuleValue(rio *rdb, char *modulename) {
 
 /* Load a Redis object of the specified type from the specified file.
  * On success a newly allocated object is returned, otherwise NULL. */
-robj *rdbLoadObject(int rdbtype, rio *rdb, robj *key) {
+robj *rdbLoadObject(int rdbtype, rio *rdb) {
     robj *o = NULL, *ele, *dec;
     uint64_t len;
     unsigned int i;
@@ -1767,7 +1767,7 @@ robj *rdbLoadObject(int rdbtype, rio *rdb, robj *key) {
             exit(1);
         }
         RedisModuleIO io;
-        moduleInitIOContext(io,mt,rdb,key);
+        moduleInitIOContext(io,mt,rdb);
         io.ver = (rdbtype == RDB_TYPE_MODULE) ? 1 : 2;
         /* Call the rdb_load method of the module providing the 10 bit
          * encoding version in the lower 10 bits of the module ID. */
@@ -1872,7 +1872,7 @@ int rdbLoadRio(rio *rdb, rdbSaveInfo *rsi, int loading_aof) {
     /* Key-specific attributes, set by opcodes before the key type. */
     long long lru_idle = -1, lfu_freq = -1, expiretime = -1, now = mstime();
     long long lru_clock = LRU_CLOCK();
-
+    
     while(1) {
         robj *key, *val;
 
@@ -1963,23 +1963,6 @@ int rdbLoadRio(rio *rdb, rdbSaveInfo *rsi, int loading_aof) {
                         "Can't load Lua script from RDB file! "
                         "BODY: %s", auxval->ptr);
                 }
-            } else if (!strcasecmp(auxkey->ptr,"redis-ver")) {
-                serverLog(LL_NOTICE,"Loading RDB produced by version %s",
-                    (char*)auxval->ptr);
-            } else if (!strcasecmp(auxkey->ptr,"ctime")) {
-                time_t age = time(NULL)-strtol(auxval->ptr,NULL,10);
-                if (age < 0) age = 0;
-                serverLog(LL_NOTICE,"RDB age %ld seconds",
-                    (unsigned long) age);
-            } else if (!strcasecmp(auxkey->ptr,"used-mem")) {
-                long long usedmem = strtoll(auxval->ptr,NULL,10);
-                serverLog(LL_NOTICE,"RDB memory usage when created %.2f Mb",
-                    (double) usedmem / (1024*1024));
-            } else if (!strcasecmp(auxkey->ptr,"aof-preamble")) {
-                long long haspreamble = strtoll(auxval->ptr,NULL,10);
-                if (haspreamble) serverLog(LL_NOTICE,"RDB has an AOF tail");
-            } else if (!strcasecmp(auxkey->ptr,"redis-bits")) {
-                /* Just ignored. */
             } else {
                 /* We ignore fields we don't understand, as by AUX field
                  * contract. */
@@ -2023,7 +2006,7 @@ int rdbLoadRio(rio *rdb, rdbSaveInfo *rsi, int loading_aof) {
         /* Read key */
         if ((key = rdbLoadStringObject(rdb)) == NULL) goto eoferr;
         /* Read value */
-        if ((val = rdbLoadObject(type,rdb,key)) == NULL) goto eoferr;
+        if ((val = rdbLoadObject(type,rdb)) == NULL) goto eoferr;
         /* Check if the key already expired. This function is used when loading
          * an RDB file from disk, either at startup, or when an RDB was
          * received from the master. In the latter case, the master is
@@ -2038,7 +2021,7 @@ int rdbLoadRio(rio *rdb, rdbSaveInfo *rsi, int loading_aof) {
 
             /* Set the expire time if needed */
             if (expiretime != -1) setExpire(NULL,db,key,expiretime);
-
+            
             /* Set usage information (for eviction). */
             objectSetLRUOrLFU(val,lfu_freq,lru_idle,lru_clock);
 
@@ -2240,16 +2223,6 @@ void backgroundSaveDoneHandler(int exitcode, int bysignal) {
         serverPanic("Unknown RDB child type.");
         break;
     }
-}
-
-/* Kill the RDB saving child using SIGUSR1 (so that the parent will know
- * the child did not exit for an error, but because we wanted), and performs
- * the cleanup needed. */
-void killRDBChild(void) {
-    kill(server.rdb_child_pid,SIGUSR1);
-    rdbRemoveTempFile(server.rdb_child_pid);
-    closeChildInfoPipe();
-    updateDictResizePolicy();
 }
 
 /* Spawn an RDB child that writes the RDB to the sockets of the slaves

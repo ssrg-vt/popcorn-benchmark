@@ -1,0 +1,3 @@
+#define REDIS_GIT_SHA1 "34dfda2d"
+#define REDIS_GIT_DIRTY "7189"
+#define REDIS_BUILD_ID "synth-1667924256"

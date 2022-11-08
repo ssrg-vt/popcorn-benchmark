@@ -171,8 +171,8 @@ REDIS_SERVER_NAME=redis-server
 REDIS_SERVER_X86=redis-server-x86
 REDIS_SERVER_AARCH64=redis-server-aarch64
 REDIS_SENTINEL_NAME=redis-sentinel
-REDIS_SERVER_OBJ=server.o networking.o adlist.o quicklist.o anet.o dict.o sds.o zmalloc.o lzf_c.o lzf_d.o pqsort.o zipmap.o sha1.o ziplist.o release.o util.o object.o db.o replication.o rdb.o t_string.o t_list.o t_set.o t_zset.o t_hash.o config.o aof.o pubsub.o multi.o debug.o sort.o intset.o syncio.o cluster.o crc16.o endianconv.o slowlog.o scripting.o bio.o rio.o rand.o memtest.o crc64.o bitops.o sentinel.o notify.o setproctitle.o blocked.o hyperloglog.o latency.o sparkline.o redis-check-rdb.o redis-check-aof.o geo.o lazyfree.o module.o evict.o expire.o geohash.o geohash_helper.o childinfo.o defrag.o siphash.o rax.o t_stream.o listpack.o localtime.o lolwut.o lolwut5.o acl.o gopher.o
-REDIS_SERVER_POPCORN_OBJ=ae.o servermain.o
+REDIS_SERVER_OBJ=server.o networking.o adlist.o quicklist.o anet.o dict.o sds.o zmalloc.o lzf_c.o lzf_d.o pqsort.o zipmap.o sha1.o ziplist.o release.o util.o object.o db.o replication.o rdb.o t_string.o t_list.o t_set.o t_zset.o t_hash.o config.o aof.o pubsub.o multi.o debug.o sort.o intset.o syncio.o cluster.o crc16.o endianconv.o slowlog.o scripting.o bio.o rio.o rand.o memtest.o crc64.o bitops.o sentinel.o notify.o setproctitle.o blocked.o hyperloglog.o latency.o sparkline.o redis-check-rdb.o redis-check-aof.o geo.o lazyfree.o module.o evict.o expire.o geohash.o geohash_helper.o childinfo.o defrag.o siphash.o rax.o t_stream.o listpack.o localtime.o lolwut.o lolwut5.o
+REDIS_SERVER_POPCORN_OBJ=ae.o server.o
 REDIS_CLI_NAME=redis-cli
 REDIS_CLI_OBJ=anet.o adlist.o dict.o redis-cli.o zmalloc.o release.o anet.o ae.o crc64.o siphash.o crc16.o
 REDIS_BENCHMARK_NAME=redis-benchmark
@@ -212,7 +212,7 @@ check_align:
 check_popcorn: check_align check_stack
 
 popcorn-objects:
-	$(POPCORN_REDIS_CC) -c $(X86_64_INC) -I../deps/hiredis -I../deps/linenoise -I../deps/lua/src ae.c servermain.c
+	$(POPCORN_REDIS_CC) -c $(X86_64_INC) -I../deps/hiredis -I../deps/linenoise -I../deps/lua/src ae.c
 
 %.dir:
 	@echo " [MKDIR] $*"
@@ -236,14 +236,14 @@ endif
 $(REDIS_SERVER_X86): FINAL_CFLAGS := $(X86_CFLAGS) $(FINAL_CFLAGS)
 $(REDIS_SERVER_X86): $(REDIS_SERVER_OBJ) popcorn-objects $(X86_64_BUILD)/.dir 
 	mv *.o $(X86_64_BUILD)
-	$(REDIS_POPCORN_LD) -o $(X86_64_BUILD)/$@ $(X86_64_BUILD)/servermain_x86_64.o $(X86_64_BUILD)/ae_x86_64.o\
+	$(REDIS_POPCORN_LD) -o $(X86_64_BUILD)/$@ $(X86_64_BUILD)/ae_x86_64.o\
         $(addprefix $(X86_64_BUILD)/,$(REDIS_SERVER_OBJ)) ../deps/hiredis/build_x86-64/libhiredis.a ../deps/lua/src/build_x86-64/liblua.a \
         $(X86_64_LDFLAGS) -Map $(X86_64_MAP)
 
 $(REDIS_SERVER_AARCH64): FINAL_CFLAGS := $(ARM_CFLAGS) $(FINAL_CFLAGS)
 $(REDIS_SERVER_AARCH64): $(REDIS_SERVER_OBJ) popcorn-objects $(ARM64_BUILD)/.dir
 	mv *.o $(ARM64_BUILD)
-	$(REDIS_POPCORN_LD) -o $(ARM64_BUILD)/$@ $(ARM64_BUILD)/servermain_aarch64.o $(ARM64_BUILD)/ae_aarch64.o\
+	$(REDIS_POPCORN_LD) -o $(ARM64_BUILD)/$@ $(ARM64_BUILD)/ae_aarch64.o\
         $(addprefix $(ARM64_BUILD)/,$(REDIS_SERVER_OBJ)) ../deps/hiredis/build_aarch64/libhiredis.a ../deps/lua/src/build_aarch64/liblua.a\
         $(ARM64_LDFLAGS)  -Map $(ARM64_MAP)
 
@@ -254,13 +254,13 @@ post_process: $(ARM64_ALIGNED) $(X86_64_ALIGNED)
 
 $(X86_64_ALIGNED): $(X86_64_LD_SCRIPT)
 	@echo " [LD] $@ (aligned)"
-	$(REDIS_POPCORN_LD) -o redis-server_x86-64 $(X86_64_BUILD)/servermain_x86_64.o $(X86_64_BUILD)/ae_x86_64.o \
+	$(REDIS_POPCORN_LD) -o redis-server_x86-64 $(X86_64_BUILD)/ae_x86_64.o \
         $(addprefix $(X86_64_BUILD)/,$(REDIS_SERVER_OBJ)) ../deps/hiredis/build_x86-64/libhiredis.a ../deps/lua/src/build_x86-64/liblua.a  \
 	    $(X86_64_LDFLAGS) -Map $(X86_64_ALIGNED_MAP) -T $<
 
 $(ARM64_ALIGNED): $(ARM64_LD_SCRIPT)
 	@echo " [LD] $@ (aligned)"
-	$(REDIS_POPCORN_LD) -o redis-server_aarch64 $(ARM64_BUILD)/servermain_aarch64.o $(ARM64_BUILD)/ae_aarch64.o\
+	$(REDIS_POPCORN_LD) -o redis-server_aarch64 $(ARM64_BUILD)/ae_aarch64.o\
         $(addprefix $(ARM64_BUILD)/,$(REDIS_SERVER_OBJ)) ../deps/hiredis/build_aarch64/libhiredis.a ../deps/lua/src/build_aarch64/liblua.a \
 	    $(ARM64_LDFLAGS) -Map $(ARM64_ALIGNED_MAP) -T $<
 

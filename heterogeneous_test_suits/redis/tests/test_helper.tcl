@@ -34,7 +34,6 @@ set ::all_tests {
     unit/multi
     unit/quit
     unit/aofrw
-    unit/acl
     integration/block-repl
     integration/replication
     integration/replication-2
@@ -503,7 +502,7 @@ for {set j 0} {$j < [llength $argv]} {incr j} {
     } elseif {$opt eq {--only}} {
         lappend ::only_tests $arg
         incr j
-    } elseif {$opt eq {--skip-till}} {
+    } elseif {$opt eq {--skiptill}} {
         set ::skip_till $arg
         incr j
     } elseif {$opt eq {--list-tests}} {

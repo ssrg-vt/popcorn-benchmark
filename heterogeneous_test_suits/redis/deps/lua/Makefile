@@ -7,8 +7,6 @@
 # Your platform. See PLATS for possible values.
 PLAT= none
 
-CFLAGS :=-O0 -Wall -nostdinc -g -target x86_64 -fno-common -ftls-model=initial-exec -D_GNU_SOURCE -popcorn-alignment -Wno-unused-function
-
 # Where to install. The installation starts in the src and doc directories,
 # so take care if INSTALL_TOP is not an absolute path.
 INSTALL_TOP= /usr/local
